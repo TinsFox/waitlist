@@ -6,11 +6,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { WaitlistItem } from "@/app/data/waitlists"
+import { Waitlist } from "@/app/data/waitlists"
 import Image from "next/image"
 import { useState } from "react"
 
-export function TemplatePreview({ template }: { template: WaitlistItem }) {
+export function TemplatePreview({ template }: { template: Waitlist }) {
   const [imageError, setImageError] = useState(false)
 
   return (

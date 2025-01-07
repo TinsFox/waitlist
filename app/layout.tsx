@@ -68,7 +68,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  manifest: "/site.webmanifest",
   openGraph: {
     type: "website",
     locale: "zh_CN",
@@ -93,12 +92,6 @@ export const metadata: Metadata = {
       "Professional product waitlist templates, help you quickly build professional product waitlist pages, improve conversion rate",
     creator: "@your_twitter_handle",
     images: ["/og.png"],
-  },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
   },
   category: "Technology",
 }

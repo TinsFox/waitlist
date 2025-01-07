@@ -1,42 +1,44 @@
-export type WaitlistItem = {
+export interface Waitlist {
   id: string
-  status: string
-  joinedCount: string
   title: string
   description: string
-  gradient: string
+  status: string
+  joinedCount: string
   link: string
+  category: string
 }
 
-export const waitlists: WaitlistItem[] = [
+export const waitlists: Waitlist[] = [
   {
-    id: "1",
+    id: "tech-pulse",
+    title: "Tech Pulse",
     status: "Popular Template",
     joinedCount: "100+ Uses",
-    title: "Tech Pulse",
     description:
       "Professional waitlist page for SaaS products and enterprise services",
-    gradient: "from-[#3245ff]/20 to-[#bc52ee]/20",
     link: "/tech-pulse",
+    category: "Technology",
   },
   {
-    id: "2",
+    id: "innovate",
+    title: "Innovate",
     status: "New",
     joinedCount: "50+ Uses",
-    title: "Innovate",
     description:
       "Unique visual experience designed for designers and creative products",
-    gradient: "from-[#36BEFF]/20 to-[#3245FF]/20",
     link: "/innovate",
+    category: "Design",
   },
   {
-    id: "3",
+    id: "neon-next",
+    title: "Neon Next",
     status: "New",
     joinedCount: "100+ Uses",
-    title: "Neon Next",
     description:
       "A waitlist template designed for modern developers and tech enthusiasts.",
-    gradient: "from-[#36BEFF]/20 to-[#3245FF]/20",
     link: "/neon-next",
+    category: "Technology",
   },
 ]
+
+export const categories = Array.from(new Set(waitlists.map((w) => w.category)))
