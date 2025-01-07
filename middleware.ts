@@ -22,5 +22,8 @@ export default async function authMiddleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard", "/((?!_next/static|_next/image|favicon.ico).*)"],
+  matcher: [
+    "/dashboard",
+    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+  ],
 }
