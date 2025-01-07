@@ -1,8 +1,9 @@
 import type { NextConfig } from "next"
+import { env } from "./env"
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["your-preview-domain.com"],
+    domains: [env.NEXT_PUBLIC_URL],
   },
 }
 
