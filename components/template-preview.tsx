@@ -9,6 +9,7 @@ import {
 import { Waitlist } from "@/app/data/waitlists"
 import Image from "next/image"
 import { useState } from "react"
+import Link from "next/link"
 
 export function TemplatePreview({ template }: { template: Waitlist }) {
   const [imageError, setImageError] = useState(false)
@@ -40,11 +41,32 @@ export function TemplatePreview({ template }: { template: Waitlist }) {
         </div>
       </DialogTrigger>
       <DialogContent className="max-w-4xl h-[80vh]">
-        <DialogHeader>
-          <DialogTitle>Template Preview</DialogTitle>
-          <DialogDescription>
-            Preview the template before you join the waitlist
-          </DialogDescription>
+        <DialogHeader className="flex flex-row items-start justify-between">
+          <div>
+            <DialogTitle>{template.title}</DialogTitle>
+            <DialogDescription>{template.description}</DialogDescription>
+          </div>
+          <Link
+            href={template.link}
+            target="_blank"
+            className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-secondary text-secondary-foreground hover:bg-secondary/80 h-9 px-4"
+          >
+            Live Preview
+            <svg
+              className="ml-2 h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              />
+            </svg>
+          </Link>
         </DialogHeader>
         {template.link ? (
           <iframe
