@@ -13,7 +13,7 @@ export const waitlists: Waitlist[] = [
     id: "tech-pulse",
     title: "Tech Pulse",
     status: "Popular Template",
-    joinedCount: "100+ Uses",
+    joinedCount: "Coming Soon",
     description:
       "Professional waitlist page for SaaS products and enterprise services",
     link: "/tech-pulse",
@@ -23,7 +23,7 @@ export const waitlists: Waitlist[] = [
     id: "innovate",
     title: "Innovate",
     status: "New",
-    joinedCount: "50+ Uses",
+    joinedCount: "Coming Soon",
     description:
       "Unique visual experience designed for designers and creative products",
     link: "/innovate",
@@ -33,7 +33,7 @@ export const waitlists: Waitlist[] = [
     id: "neon-next",
     title: "Neon Next",
     status: "New",
-    joinedCount: "100+ Uses",
+    joinedCount: "Coming Soon",
     description:
       "A waitlist template designed for modern developers and tech enthusiasts.",
     link: "/neon-next",
