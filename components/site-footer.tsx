@@ -3,9 +3,9 @@ import Link from "next/link"
 export function SiteFooter() {
   return (
     <footer className="border-t bg-background/50 backdrop-blur-xl">
-      <div className="container flex flex-col gap-8 py-8 md:py-12 max-w-7xl mx-auto">
-        <div className="flex flex-col gap-6 md:flex-row md:gap-12">
-          <div className="space-y-4 md:w-1/4">
+      <div className="container px-4 py-6 md:py-8 lg:py-12 max-w-7xl mx-auto">
+        <div className="flex flex-col gap-8 lg:flex-row lg:gap-12">
+          <div className="space-y-3 lg:w-1/4">
             <Link href="/" className="flex items-center space-x-2">
               <span className="text-xl font-bold">afjs</span>
             </Link>
@@ -14,10 +14,10 @@ export function SiteFooter() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 md:flex-1 md:justify-end">
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-2 md:grid-cols-4 lg:flex-1 lg:justify-end">
             <div className="space-y-3">
               <h4 className="text-sm font-medium">PRODUCT</h4>
-              <ul className="space-y-2.5">
+              <ul className="space-y-2">
                 <li>
                   <Link
                     href="/"
@@ -47,7 +47,7 @@ export function SiteFooter() {
 
             <div className="space-y-3">
               <h4 className="text-sm font-medium">TEAM</h4>
-              <ul className="space-y-2.5">
+              <ul className="space-y-2">
                 <li>
                   <a
                     href="https://github.com/innocces"
@@ -83,7 +83,7 @@ export function SiteFooter() {
 
             <div className="space-y-3">
               <h4 className="text-sm font-medium">COMMUNITY</h4>
-              <ul className="space-y-2.5">
+              <ul className="space-y-2">
                 <li>
                   <a
                     href="https://discord.com"
@@ -117,7 +117,7 @@ export function SiteFooter() {
 
             <div className="space-y-3">
               <h4 className="text-sm font-medium">LEGAL</h4>
-              <ul className="space-y-2.5">
+              <ul className="space-y-2">
                 <li>
                   <Link
                     href="/terms"
@@ -139,7 +139,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between border-t pt-8">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between border-t mt-8 pt-6 md:pt-8">
           <div className="flex gap-4">
             <a
               href="https://discord.com"
