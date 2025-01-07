@@ -142,7 +142,7 @@ export default function SignIn() {
 
               <div className="text-center">
                 <p className="text-neutral-400 text-sm">
-                  Don't have an account?{" "}
+                  Don&apos;t have an account?{" "}
                   <a
                     href="/sign-up"
                     className="text-purple-400 hover:text-purple-300 transition-colors"
