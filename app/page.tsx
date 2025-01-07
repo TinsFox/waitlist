@@ -25,6 +25,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { SiteFooter } from "@/components/site-footer"
+import { WaitlistForm } from "@/components/waitlist-form"
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -74,6 +75,10 @@ export default function Home() {
             Carefully designed waitlist templates to help you quickly build
             professional product reservation pages and improve conversion rates
           </p>
+
+          <div className="mt-8">
+            <WaitlistForm />
+          </div>
         </motion.div>
 
         <div className="mb-8 flex flex-col md:flex-row gap-4">
