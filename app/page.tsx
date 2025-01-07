@@ -14,7 +14,7 @@ import Link from "next/link"
 import * as motion from "motion/react-client"
 import { waitlists, categories } from "./data/waitlists"
 import { TemplatePreview } from "@/components/template-preview"
-import { ThemeToggle } from "@/components/theme-toggle"
+
 import { SquareArrowOutUpRight } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import {
@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/select"
 import { SiteFooter } from "@/components/site-footer"
 import { WaitlistForm } from "@/components/waitlist-form"
+import { SiteHeader } from "@/components/site-header"
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -48,15 +49,13 @@ export default function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_400px,hsl(var(--primary))_4%,transparent)] dark:bg-[radial-gradient(circle_800px_at_50%_400px,hsl(var(--primary))_12%,transparent)]" />
       </div>
 
+      <SiteHeader />
+
       <main
-        className="flex-1 container mx-auto px-4 py-16 relative"
+        className="flex-1 container mx-auto px-4 py-16 mt-16 relative"
         role="main"
         aria-label="Template showcase page"
       >
-        <div className="absolute right-4 top-4">
-          <ThemeToggle />
-        </div>
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

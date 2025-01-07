@@ -15,6 +15,20 @@
       "when": 1736234119325,
       "tag": "0001_public_sleeper",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1736235739183,
+      "tag": "0002_panoramic_silver_centurion",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1736239375483,
+      "tag": "0003_wakeful_the_stranger",
+      "breakpoints": true
     }
   ]
 }
