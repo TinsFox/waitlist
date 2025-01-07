@@ -32,8 +32,8 @@ export function TemplatePreview({ template }: { template: Waitlist }) {
               title="Template Preview"
             />
           )}
-          <button className="absolute inset-0 flex items-center justify-center text-white cursor-pointer bg-black bg-opacity-0 group-hover:bg-opacity-50">
-            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          <button className="absolute inset-0 flex items-center justify-center text-white cursor-pointer bg-black transition-all duration-300 ease-in-out bg-opacity-0 group-hover:bg-opacity-50">
+            <span className="transform scale-95 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300 ease-in-out">
               Click to view full preview
             </span>
           </button>
