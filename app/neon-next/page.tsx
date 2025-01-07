@@ -1,0 +1,117 @@
+'use client';
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useTheme } from "next-themes";
+import { Moon, Sun, ArrowRight, Sparkles, Code2, Boxes, Workflow } from "lucide-react";
+import { useState } from "react";
+
+export default function Home() {
+  const { theme, setTheme } = useTheme();
+  const [email, setEmail] = useState("");
+
+  return (
+    <main className="min-h-screen bg-background relative overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f46e5,#0ea5e9,#6366f1)] opacity-[0.15] dark:opacity-20 animate-gradient" />
+      
+      {/* Animated Grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f29370a_1px,transparent_1px),linear-gradient(to_bottom,#1f29370a_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+
+      {/* Floating Elements */}
+      <div className="absolute top-20 left-20 w-64 h-64 bg-blue-500/30 rounded-full blur-3xl animate-float" />
+      <div className="absolute bottom-20 right-20 w-64 h-64 bg-purple-500/30 rounded-full blur-3xl animate-float" style={{ animationDelay: "-2s" }} />
+
+      {/* Theme Toggle */}
+      <div className="absolute top-6 right-6 z-50">
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+          className="backdrop-blur-sm bg-background/50"
+        >
+          <Sun className="h-5 w-5 rotate-0 scale-100 transition-transform dark:-rotate-90 dark:scale-0" />
+          <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-transform dark:rotate-0 dark:scale-100" />
+        </Button>
+      </div>
+
+      {/* Main Content */}
+      <div className="container max-w-[1200px] mx-auto px-4 py-24 relative z-10">
+        <div className="flex flex-col items-center space-y-8">
+          {/* Animated Badge */}
+          <div className="inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary/10 text-primary backdrop-blur-sm hover:bg-primary/20 cursor-pointer group">
+            <Sparkles className="mr-1 h-3 w-3 animate-pulse-slow" />
+            <span className="relative">
+              Coming Soon
+              <span className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-primary/0 via-primary/70 to-primary/0 transition-opacity duration-500 opacity-0 group-hover:opacity-100" />
+            </span>
+          </div>
+
+          {/* Hero Text with Gradient */}
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-center max-w-[900px] [text-wrap:balance] bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 pb-2 animate-gradient bg-[size:400%_400%]">
+            Build the future of development
+          </h1>
+
+          <p className="text-lg text-muted-foreground max-w-[600px] text-center leading-relaxed">
+            Join thousands of developers revolutionizing the way we build software. Be the first to experience the next generation of development tools.
+          </p>
+
+          {/* Email Input with Animation */}
+          <div className="flex flex-col sm:flex-row w-full max-w-[500px] gap-3 group/form">
+            <div className="relative flex-1">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg blur opacity-30 group-hover/form:opacity-75 transition duration-1000"></div>
+              <Input 
+                type="email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                className="relative h-12 bg-background/80 backdrop-blur-sm"
+              />
+            </div>
+            <Button className="h-12 px-8 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-500 shadow-lg hover:shadow-blue-500/25">
+              Join Waitlist
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </div>
+
+          {/* Feature Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-[1000px] mt-16">
+            <div className="group p-6 backdrop-blur-sm bg-background/50 rounded-xl border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
+              <Code2 className="h-6 w-6 mb-4 text-blue-500" />
+              <h3 className="text-lg font-semibold mb-2">Smart Coding</h3>
+              <p className="text-sm text-muted-foreground">Advanced AI assistance that understands your codebase deeply.</p>
+            </div>
+            <div className="group p-6 backdrop-blur-sm bg-background/50 rounded-xl border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
+              <Boxes className="h-6 w-6 mb-4 text-purple-500" />
+              <h3 className="text-lg font-semibold mb-2">Modular Design</h3>
+              <p className="text-sm text-muted-foreground">Build complex systems from simple, reusable components.</p>
+            </div>
+            <div className="group p-6 backdrop-blur-sm bg-background/50 rounded-xl border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
+              <Workflow className="h-6 w-6 mb-4 text-pink-500" />
+              <h3 className="text-lg font-semibold mb-2">Seamless Flow</h3>
+              <p className="text-sm text-muted-foreground">Streamlined workflows that adapt to your development style.</p>
+            </div>
+          </div>
+
+          {/* Stats with Animation */}
+          <div className="w-full max-w-[800px] mt-16">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 divide-y sm:divide-y-0 sm:divide-x divide-border/40">
+              <div className="flex flex-col items-center py-4">
+                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">50k+</p>
+                <p className="text-sm text-muted-foreground mt-1">Active Users</p>
+              </div>
+              <div className="flex flex-col items-center py-4">
+                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">200ms</p>
+                <p className="text-sm text-muted-foreground mt-1">Response Time</p>
+              </div>
+              <div className="flex flex-col items-center py-4">
+                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-500">99.9%</p>
+                <p className="text-sm text-muted-foreground mt-1">Uptime</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
