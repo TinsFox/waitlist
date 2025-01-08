@@ -1,13 +1,9 @@
-'use client';
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { ThemeToggle } from "@/components/theme-toggle"
+import { Rocket, Cpu, Wifi, Globe2, Terminal } from "lucide-react"
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { useTheme } from "next-themes";
-import { Moon, Sun, Rocket, Cpu, Wifi, Globe2, Terminal } from "lucide-react";
-
-export default function Home() {
-  const { theme, setTheme } = useTheme();
-
+export default function TechPulse() {
   return (
     <main className="min-h-screen bg-background relative overflow-hidden">
       {/* Animated Background */}
@@ -17,17 +13,7 @@ export default function Home() {
       </div>
 
       {/* Theme Toggle */}
-      <div className="absolute top-4 right-4">
-        <Button
-          variant="outline"
-          size="icon"
-          className="border border-neutral-200 dark:border-neutral-800"
-          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-        >
-          <Sun className="h-5 w-5 rotate-0 scale-100 transition-transform dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-transform dark:rotate-0 dark:scale-100" />
-        </Button>
-      </div>
+      <ThemeToggle className="absolute top-4 right-4" />
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-16">
@@ -50,13 +36,14 @@ export default function Home() {
           </h1>
 
           <p className="text-xl text-muted-foreground max-w-[600px] leading-relaxed">
-            Join the waitlist for the next generation of AI-powered development tools.
+            Join the waitlist for the next generation of AI-powered development
+            tools.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 w-full max-w-[500px] relative">
             <div className="absolute -z-10 blur-xl bg-gradient-to-r from-blue-500/30 to-purple-500/30 w-full h-full" />
-            <Input 
-              type="email" 
+            <Input
+              type="email"
               placeholder="Enter your email"
               className="flex-1 h-12 bg-background/80 backdrop-blur-sm border-neutral-200 dark:border-neutral-800"
             />
@@ -92,5 +79,5 @@ export default function Home() {
         </div>
       </div>
     </main>
-  );
+  )
 }

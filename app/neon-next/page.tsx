@@ -1,39 +1,55 @@
-'use client';
+"use client"
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { useTheme } from "next-themes";
-import { Moon, Sun, ArrowRight, Sparkles, Code2, Boxes, Workflow } from "lucide-react";
-import { useState } from "react";
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { ArrowRight, Sparkles, Code2, Boxes, Workflow } from "lucide-react"
+import { ThemeToggle } from "@/components/theme-toggle"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
 
-export default function Home() {
-  const { theme, setTheme } = useTheme();
-  const [email, setEmail] = useState("");
+import * as z from "zod"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form"
+
+const formSchema = z.object({
+  email: z.string().email("Please enter a valid email address"),
+})
+
+export default function NeonNext() {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+    },
+  })
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values)
+    // Handle form submission
+  }
 
   return (
     <main className="min-h-screen bg-background relative overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f46e5,#0ea5e9,#6366f1)] opacity-[0.15] dark:opacity-20 animate-gradient" />
-      
+
       {/* Animated Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f29370a_1px,transparent_1px),linear-gradient(to_bottom,#1f29370a_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
 
       {/* Floating Elements */}
       <div className="absolute top-20 left-20 w-64 h-64 bg-blue-500/30 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-20 right-20 w-64 h-64 bg-purple-500/30 rounded-full blur-3xl animate-float" style={{ animationDelay: "-2s" }} />
+      <div
+        className="absolute bottom-20 right-20 w-64 h-64 bg-purple-500/30 rounded-full blur-3xl animate-float"
+        style={{ animationDelay: "-2s" }}
+      />
 
       {/* Theme Toggle */}
-      <div className="absolute top-6 right-6 z-50">
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          className="backdrop-blur-sm bg-background/50"
-        >
-          <Sun className="h-5 w-5 rotate-0 scale-100 transition-transform dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-transform dark:rotate-0 dark:scale-100" />
-        </Button>
-      </div>
+      <ThemeToggle className="absolute top-6 right-6 z-50" />
 
       {/* Main Content */}
       <div className="container max-w-[1200px] mx-auto px-4 py-24 relative z-10">
@@ -53,25 +69,47 @@ export default function Home() {
           </h1>
 
           <p className="text-lg text-muted-foreground max-w-[600px] text-center leading-relaxed">
-            Join thousands of developers revolutionizing the way we build software. Be the first to experience the next generation of development tools.
+            Join thousands of developers revolutionizing the way we build
+            software. Be the first to experience the next generation of
+            development tools.
           </p>
 
           {/* Email Input with Animation */}
           <div className="flex flex-col sm:flex-row w-full max-w-[500px] gap-3 group/form">
-            <div className="relative flex-1">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg blur opacity-30 group-hover/form:opacity-75 transition duration-1000"></div>
-              <Input 
-                type="email" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="relative h-12 bg-background/80 backdrop-blur-sm"
-              />
-            </div>
-            <Button className="h-12 px-8 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-500 shadow-lg hover:shadow-blue-500/25">
-              Join Waitlist
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button>
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="w-full flex flex-col sm:flex-row gap-3"
+              >
+                <div className="relative flex-1">
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg blur opacity-30 group-hover/form:opacity-75 transition duration-1000"></div>
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input
+                            type="email"
+                            placeholder="Enter your email"
+                            className="relative h-12 bg-background/80 backdrop-blur-sm"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  className="h-12 px-8 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-500 shadow-lg hover:shadow-blue-500/25"
+                >
+                  Join Waitlist
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </form>
+            </Form>
           </div>
 
           {/* Feature Cards */}
@@ -79,17 +117,23 @@ export default function Home() {
             <div className="group p-6 backdrop-blur-sm bg-background/50 rounded-xl border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
               <Code2 className="h-6 w-6 mb-4 text-blue-500" />
               <h3 className="text-lg font-semibold mb-2">Smart Coding</h3>
-              <p className="text-sm text-muted-foreground">Advanced AI assistance that understands your codebase deeply.</p>
+              <p className="text-sm text-muted-foreground">
+                Advanced AI assistance that understands your codebase deeply.
+              </p>
             </div>
             <div className="group p-6 backdrop-blur-sm bg-background/50 rounded-xl border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
               <Boxes className="h-6 w-6 mb-4 text-purple-500" />
               <h3 className="text-lg font-semibold mb-2">Modular Design</h3>
-              <p className="text-sm text-muted-foreground">Build complex systems from simple, reusable components.</p>
+              <p className="text-sm text-muted-foreground">
+                Build complex systems from simple, reusable components.
+              </p>
             </div>
             <div className="group p-6 backdrop-blur-sm bg-background/50 rounded-xl border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
               <Workflow className="h-6 w-6 mb-4 text-pink-500" />
               <h3 className="text-lg font-semibold mb-2">Seamless Flow</h3>
-              <p className="text-sm text-muted-foreground">Streamlined workflows that adapt to your development style.</p>
+              <p className="text-sm text-muted-foreground">
+                Streamlined workflows that adapt to your development style.
+              </p>
             </div>
           </div>
 
@@ -97,15 +141,25 @@ export default function Home() {
           <div className="w-full max-w-[800px] mt-16">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 divide-y sm:divide-y-0 sm:divide-x divide-border/40">
               <div className="flex flex-col items-center py-4">
-                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">50k+</p>
-                <p className="text-sm text-muted-foreground mt-1">Active Users</p>
+                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
+                  50k+
+                </p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Active Users
+                </p>
               </div>
               <div className="flex flex-col items-center py-4">
-                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">200ms</p>
-                <p className="text-sm text-muted-foreground mt-1">Response Time</p>
+                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">
+                  200ms
+                </p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Response Time
+                </p>
               </div>
               <div className="flex flex-col items-center py-4">
-                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-500">99.9%</p>
+                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-500">
+                  99.9%
+                </p>
                 <p className="text-sm text-muted-foreground mt-1">Uptime</p>
               </div>
             </div>
@@ -113,5 +167,5 @@ export default function Home() {
         </div>
       </div>
     </main>
-  );
+  )
 }
