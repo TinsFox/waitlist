@@ -1,6 +1,7 @@
 import { betterFetch } from "@better-fetch/fetch"
 import type { auth } from "@/lib/auth"
 import { NextResponse, type NextRequest } from "next/server"
+import { env } from "./env"
 
 type Session = typeof auth.$Infer.Session
 
@@ -8,7 +9,7 @@ export default async function authMiddleware(request: NextRequest) {
   const { data: session } = await betterFetch<Session>(
     "/api/auth/get-session",
     {
-      baseURL: request.nextUrl.origin,
+      baseURL: env.NEXT_PUBLIC_URL,
       headers: {
         cookie: request.headers.get("cookie") || "",
       },
