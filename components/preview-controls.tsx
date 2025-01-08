@@ -18,13 +18,6 @@ interface PreviewControlsProps {
   }
 }
 
-const viewportValues: Record<ViewportSize, string> = {
-  desktop: "100",
-  tablet: "60",
-  mobile: "30",
-  fullscreen: "100",
-}
-
 export function PreviewControls({
   viewport,
   onViewportChange,

@@ -53,3 +53,16 @@ export type NewWaitlist = typeof waitlists.$inferInsert
 
 export type Email = typeof emails.$inferSelect
 export type NewEmail = typeof emails.$inferInsert
+
+export const waitlistTemplates = pgTable("waitlist_templates", {
+  id: serial("id").primaryKey(),
+  title: varchar("title", { length: 100 }),
+  description: text("description"),
+  link: varchar("link", { length: 255 }),
+  category: varchar("category", { length: 100 }),
+  status: varchar("status", { length: 100 }),
+  joinedCount: varchar("joined_count", { length: 100 }),
+})
+
+export type WaitlistTemplate = typeof waitlistTemplates.$inferSelect
+export type NewWaitlistTemplate = typeof waitlistTemplates.$inferInsert

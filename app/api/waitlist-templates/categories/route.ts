@@ -1,9 +1,10 @@
-import { waitlistTemplates } from "../route"
+import { waitlistTemplates } from "@/lib/db/schema"
 import { NextResponse } from "next/server"
+import { db } from "@/lib/db"
 
 export async function GET() {
-  const categories = Array.from(
-    new Set(waitlistTemplates.map((w) => w.category))
-  )
+  const categories = await db
+    .selectDistinct({ category: waitlistTemplates.category })
+    .from(waitlistTemplates)
   return NextResponse.json(categories)
 }

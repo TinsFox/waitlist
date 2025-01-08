@@ -6,16 +6,6 @@ import { Button } from "@/components/ui/button"
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-declare global {
-  interface Document {
-    startViewTransition?: (callback: () => void) => {
-      finished: Promise<void>
-      ready: Promise<void>
-      updateCallbackDone: Promise<void>
-    }
-  }
-}
-
 const ThemeToggle = React.forwardRef<
   HTMLButtonElement,
   React.ComponentPropsWithoutRef<typeof Button>
@@ -24,15 +14,17 @@ const ThemeToggle = React.forwardRef<
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light"
-
-    if (!document.startViewTransition) {
+    if ("startViewTransition" in document) {
+      ;(
+        document as Document & {
+          startViewTransition: (callback: () => void) => void
+        }
+      ).startViewTransition(() => {
+        setTheme(newTheme)
+      })
+    } else {
       setTheme(newTheme)
-      return
     }
-
-    document.startViewTransition(() => {
-      setTheme(newTheme)
-    })
   }
 
   return (
