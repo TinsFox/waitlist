@@ -26,7 +26,6 @@ export async function FilteredTemplates({
 
   const waitlistTemplates = await getWaitlistTemplates()
 
-  // 转换为小写以提高性能
   const searchQueryLower = searchQuery.toLowerCase()
 
   const filteredWaitlists = waitlistTemplates.filter((waitlist) => {

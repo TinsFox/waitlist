@@ -45,6 +45,10 @@ export function ClientSearchFilters({ categories }: ClientSearchFiltersProps) {
           aria-label="Search templates"
         />
       </div>
+
+      {isPending && (
+        <div className="h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
+      )}
       <Select
         value={searchParams.category}
         onValueChange={(value) => setSearchParams({ category: value })}
@@ -62,11 +66,6 @@ export function ClientSearchFilters({ categories }: ClientSearchFiltersProps) {
           ))}
         </SelectContent>
       </Select>
-
-      {/* Optional: Add loading indicator */}
-      {isPending && (
-        <div className="h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
-      )}
     </div>
   )
 }
