@@ -14,8 +14,8 @@ import { useSetAtom } from "jotai"
 import { previewAtom } from "@/lib/atoms"
 
 import { WaitlistTemplate } from "@/app/data/waitlists"
-import Image from "next/image"
-import { useState } from "react"
+// import Image from "next/image"
+// import { useState } from "react"
 
 interface TemplateCardProps {
   template: WaitlistTemplate
@@ -29,7 +29,7 @@ export function TemplateCard({
   templates,
 }: TemplateCardProps) {
   const setPreview = useSetAtom(previewAtom)
-  const [imageError, setImageError] = useState(false)
+  // const [imageError, setImageError] = useState(false)
 
   const handleClick = () => {
     setPreview({
@@ -73,7 +73,14 @@ export function TemplateCard({
       </CardHeader>
       <CardContent className="flex-grow">
         <div className="relative group h-[200px]">
-          {!imageError ? (
+          {template.link && (
+            <iframe
+              src={template.link}
+              className="w-full h-full border-0 rounded-md"
+              title="Template Preview"
+            />
+          )}
+          {/* {!imageError ? (
             <Image
               src={`/templates/${template.id}.jpg`}
               alt={template.title}
@@ -87,7 +94,7 @@ export function TemplateCard({
               className="w-full h-full border-0 rounded-md"
               title="Template Preview"
             />
-          )}
+          )} */}
           <button
             className="rounded-md absolute inset-0 flex items-center justify-center text-white cursor-pointer bg-black transition-all duration-300 ease-in-out bg-opacity-0 group-hover:bg-opacity-50"
             onClick={handleClick}
