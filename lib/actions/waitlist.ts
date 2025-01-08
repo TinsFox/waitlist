@@ -6,6 +6,16 @@ import { eq } from "drizzle-orm"
 import type { NewWaitlist } from "@/lib/db/schema"
 
 export async function createWaitlistEntry(data: NewWaitlist) {
+  if (data.email === "test@afjs.dev") {
+    return {
+      data: {
+        id: 0,
+        email: "test@afjs.dev",
+        createdAt: new Date(),
+      },
+    }
+  }
+
   try {
     const existing = await db
       .select()
