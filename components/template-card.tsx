@@ -14,8 +14,6 @@ import { useSetAtom } from "jotai"
 import { previewAtom } from "@/lib/atoms"
 
 import { WaitlistTemplate } from "@/app/data/waitlists"
-// import Image from "next/image"
-// import { useState } from "react"
 
 interface TemplateCardProps {
   template: WaitlistTemplate
@@ -29,7 +27,6 @@ export function TemplateCard({
   templates,
 }: TemplateCardProps) {
   const setPreview = useSetAtom(previewAtom)
-  // const [imageError, setImageError] = useState(false)
 
   const handleClick = () => {
     setPreview({
@@ -43,16 +40,16 @@ export function TemplateCard({
     <Card className="group border border-border/40 bg-background/60 dark:bg-card/80 backdrop-blur-xl transition-all duration-300 hover:border-border/60 hover:shadow-lg dark:hover:border-border/30 h-full flex flex-col">
       <CardHeader>
         <div className="flex items-center justify-between">
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <Badge
               variant="secondary"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground"
+              className="px-2.5 py-0.5 text-xs font-medium bg-primary/15 text-primary hover:bg-primary/25 transition-colors"
             >
               {template.status}
             </Badge>
             <Badge
               variant="secondary"
-              className="bg-muted hover:bg-muted/90 text-muted-foreground"
+              className="px-2.5 py-0.5 text-xs font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
             >
               {template.category}
             </Badge>
