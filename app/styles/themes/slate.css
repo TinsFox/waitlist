@@ -1,0 +1,95 @@
+:root {
+  --background: 206 98% 98%; /* slate1 */
+  --foreground: 200 7% 8.8%; /* slate12 */
+
+  --card: 0 0% 100%;
+  --card-foreground: 200 7% 8.8%; /* slate12 */
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 200 7% 8.8%; /* slate12 */
+
+  --primary: 201 96% 32.2%; /* slate10 */
+  --primary-foreground: 206 98% 98%; /* slate1 */
+
+  --secondary: 200 6% 90%; /* slate3 */
+  --secondary-foreground: 200 7% 8.8%; /* slate12 */
+
+  --muted: 200 6% 90%; /* slate3 */
+  --muted-foreground: 200 6% 45%; /* slate8 */
+
+  --accent: 206 6% 56.1%; /* slate7 */
+  --accent-foreground: 200 7% 8.8%; /* slate12 */
+
+  --destructive: 358 75% 59%; /* red9 */
+  --destructive-foreground: 206 98% 98%; /* slate1 */
+
+  --border: 201 5% 88%; /* slate4 */
+  --input: 201 5% 88%; /* slate4 */
+  --ring: 200 7% 8.8%; /* slate12 */
+
+  /* Chart colors using various Radix scales */
+  --chart-1: 358 75% 59%; /* red9 */
+  --chart-2: 171 77% 64%; /* cyan9 */
+  --chart-3: 272 51% 54%; /* purple9 */
+  --chart-4: 49 95% 50%; /* yellow9 */
+  --chart-5: 25 95% 53%; /* orange9 */
+
+  /* Sidebar specific colors */
+  --sidebar-background: 206 98% 98%; /* slate1 */
+  --sidebar-foreground: 206 6% 43.5%; /* slate9 */
+  --sidebar-primary: 200 7% 8.8%; /* slate12 */
+  --sidebar-primary-foreground: 206 98% 98%; /* slate1 */
+  --sidebar-accent: 200 6% 90%; /* slate3 */
+  --sidebar-accent-foreground: 200 7% 8.8%; /* slate12 */
+  --sidebar-border: 201 5% 88%; /* slate4 */
+  --sidebar-ring: 206 100% 50%; /* blue9 */
+
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 200 7% 8.8%; /* slate12 */
+  --foreground: 206 98% 98%; /* slate1 */
+
+  --card: 200 7% 8.8%; /* slate12 */
+  --card-foreground: 206 98% 98%; /* slate1 */
+
+  --popover: 200 7% 8.8%; /* slate12 */
+  --popover-foreground: 206 98% 98%; /* slate1 */
+
+  --primary: 205 70% 91%; /* slate2 */
+  --primary-foreground: 200 7% 8.8%; /* slate12 */
+
+  --secondary: 200 5% 15%; /* slate5 */
+  --secondary-foreground: 206 98% 98%; /* slate1 */
+
+  --muted: 200 5% 15%; /* slate5 */
+  --muted-foreground: 206 6% 63%; /* slate8 */
+
+  --accent: 200 5% 25%; /* slate6 */
+  --accent-foreground: 206 98% 98%; /* slate1 */
+
+  --destructive: 358 65% 48%; /* red11 */
+  --destructive-foreground: 206 98% 98%; /* slate1 */
+
+  --border: 200 5% 15%; /* slate5 */
+  --input: 200 5% 15%; /* slate5 */
+  --ring: 205 70% 91%; /* slate2 */
+
+  /* Dark mode chart colors */
+  --chart-1: 359 100% 77%; /* red10 */
+  --chart-2: 170 70% 65%; /* cyan10 */
+  --chart-3: 272 66% 70%; /* purple10 */
+  --chart-4: 48 100% 47%; /* yellow10 */
+  --chart-5: 24 100% 62%; /* orange10 */
+
+  /* Dark mode sidebar colors */
+  --sidebar-background: 200 7% 8.8%; /* slate12 */
+  --sidebar-foreground: 206 98% 98%; /* slate1 */
+  --sidebar-primary: 206 100% 50%; /* blue9 */
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 200 5% 25%; /* slate6 */
+  --sidebar-accent-foreground: 206 98% 98%; /* slate1 */
+  --sidebar-border: 200 5% 25%; /* slate6 */
+  --sidebar-ring: 206 100% 50%; /* blue9 */
+}
