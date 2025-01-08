@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { authClient } from "@/lib/auth-client"
+import { cn } from "@/lib/utils"
 
 export function SiteHeader() {
   const { data: session } = authClient.useSession()
@@ -51,7 +52,15 @@ export function SiteHeader() {
                 className="text-sm font-normal"
                 asChild
               >
-                <Link href="/dashboard">Dashboard</Link>
+                <Link
+                  href="/dashboard"
+                  className={cn(
+                    "text-sm font-normal",
+                    session.user.role !== "admin" && "opacity-50 pointer-events-none"
+                  )}
+                >
+                  Dashboard
+                </Link>
               </Button>
             </>
           ) : (
