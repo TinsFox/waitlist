@@ -4,7 +4,6 @@ import { toast } from "sonner"
 
 export const authClient = createAuthClient({
   plugins: [adminClient(), usernameClient()],
-
   fetchOptions: {
     onError(e) {
       if (e.error.status === 429) {

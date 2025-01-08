@@ -24,6 +24,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import Link from "next/link"
+import { toast } from "sonner"
 
 const signInSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -48,10 +50,25 @@ export default function SignIn() {
   async function onSubmit(data: SignInValues) {
     setLoading(true)
     try {
-      await signIn.email({
-        email: data.email,
-        password: data.password,
-      })
+      await signIn.email(
+        {
+          email: data.email,
+          password: data.password,
+          rememberMe: data.rememberMe,
+          callbackURL: "/dashboard",
+        },
+        {
+          onRequest: () => {
+            setLoading(true)
+          },
+          onResponse: () => {
+            setLoading(false)
+          },
+          onError: (ctx) => {
+            toast.error(ctx.error.message)
+          },
+        }
+      )
     } finally {
       setLoading(false)
     }
@@ -95,7 +112,17 @@ export default function SignIn() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-neutral-200">Password</FormLabel>
+                    <div className="flex justify-between items-center">
+                      <FormLabel className="text-neutral-200">
+                        Password
+                      </FormLabel>
+                      <Link
+                        href="/forget-password"
+                        className="text-sm text-purple-400 hover:text-purple-300 transition-colors"
+                      >
+                        Forgot password?
+                      </Link>
+                    </div>
                     <FormControl>
                       <Input
                         type="password"
@@ -136,7 +163,7 @@ export default function SignIn() {
                 {loading ? (
                   <Loader2 size={16} className="animate-spin" />
                 ) : (
-                  "Continue"
+                  "Sign in"
                 )}
               </Button>
 
