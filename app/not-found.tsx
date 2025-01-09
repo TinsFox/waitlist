@@ -14,7 +14,7 @@ export default function NotFound() {
         className="relative z-10 space-y-6 text-center"
       >
         <div className="space-y-2">
-          <h1 className="bg-gradient-to-br from-foreground to-foreground/80 bg-clip-text text-4xl font-bold tracking-tighter text-transparent sm:text-5xl">
+          <h1 className="bg-gradient-to-br from-foreground to-foreground/80 bg-clip-text text-4xl font-bold pb-1 leading-relaxed text-transparent sm:text-5xl">
             404 - Page Not Found
           </h1>
           <p className="text-muted-foreground">
