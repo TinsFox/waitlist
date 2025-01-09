@@ -7,7 +7,7 @@ import { authClient } from "@/lib/auth-client"
 import { cn } from "@/lib/utils"
 
 export function SiteHeader() {
-  const { data: session } = authClient.useSession()
+  const { data: session, isPending } = authClient.useSession()
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-sm">
@@ -44,7 +44,11 @@ export function SiteHeader() {
           </nav>
         </div>
         <div className="flex items-center gap-2">
-          {session ? (
+          {isPending ? (
+            <div className="flex items-center gap-2">
+              <div className="h-9 w-16 rounded bg-muted animate-pulse" />
+            </div>
+          ) : session ? (
             <>
               <Button
                 variant="ghost"
@@ -56,7 +60,8 @@ export function SiteHeader() {
                   href="/dashboard"
                   className={cn(
                     "text-sm font-normal",
-                    session.user.role !== "admin" && "opacity-50 pointer-events-none"
+                    session.user.role !== "admin" &&
+                      "opacity-50 pointer-events-none"
                   )}
                 >
                   Dashboard
