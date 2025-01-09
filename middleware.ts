@@ -19,9 +19,9 @@ export default async function authMiddleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/sign-in", request.url))
   }
 
-  // if (session.user.role !== "admin") {
-  //   return NextResponse.redirect(new URL("/forbidden", request.url))
-  // }
+  if (process.env.NODE_ENV !== "development" && session.user.role !== "admin") {
+    return NextResponse.redirect(new URL("/forbidden", request.url))
+  }
 
   return NextResponse.next()
 }
