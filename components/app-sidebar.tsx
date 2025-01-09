@@ -106,6 +106,11 @@ export const navigationData: NavSection[] = [
         url: "/integrations",
         icon: Share2,
       },
+      {
+        title: "Send Email",
+        url: "/email",
+        icon: Mail,
+      },
     ],
   },
   {

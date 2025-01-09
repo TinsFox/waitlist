@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { useQueryState } from "nuqs"
 import { searchParamsSchema } from "@/lib/search-params-schema"
-import { useUsers, type SortDirection } from "@/hooks/use-users"
+import { SortDirection, useUsers } from "@/hooks/use-users"
 import { UserActions } from "./user-actions"
 import { PaginationControls } from "./pagination-controls"
 import type { UserWithRole } from "@/lib/types"
@@ -33,7 +33,7 @@ export function UsersTable() {
     page,
     searchTerm,
     sortBy,
-    sortDirection,
+    sortDirection: sortDirection as SortDirection,
   })
 
   if (error) {
