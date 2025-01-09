@@ -30,7 +30,6 @@ export function TemplateList({ templates }: TemplateListProps) {
               template={template}
               index={index}
               templates={templates}
-              href={`/email-templates/${template.id}`}
             />
           </motion.div>
         ))}
