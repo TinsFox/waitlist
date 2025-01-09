@@ -1,123 +1,63 @@
 import {
   Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
+  CardDescription,
 } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { SquareArrowOutUpRight } from "lucide-react"
+import { Mail } from "lucide-react"
 import Link from "next/link"
-import { useSetAtom } from "jotai"
-import { previewAtom } from "@/lib/atoms"
 
-import { WaitlistTemplate } from "@/app/data/waitlists"
-
-interface TemplateCardProps {
-  template: WaitlistTemplate
-  index: number
-  templates: WaitlistTemplate[]
+interface Template {
+  id: string
+  name: string
+  description: string
+  category: string
+  updatedAt: string
 }
 
-export function TemplateCard({
-  template,
-  index,
-  templates,
-}: TemplateCardProps) {
-  const setPreview = useSetAtom(previewAtom)
+interface TemplateCardProps {
+  template: Template
+  href: string
+}
 
-  const handleClick = () => {
-    setPreview({
-      isOpen: true,
-      templates,
-      currentIndex: index,
-    })
-  }
+const categoryColors: Record<string, string> = {
+  onboarding: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300",
+  marketing:
+    "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300",
+  transactional:
+    "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300",
+  notification:
+    "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300",
+}
 
+export function TemplateCard({ template, href }: TemplateCardProps) {
   return (
-    <Card className="group border border-border/40 bg-background/60 dark:bg-card/80 backdrop-blur-xl transition-all duration-300 hover:border-border/60 hover:shadow-lg dark:hover:border-border/30 h-full flex flex-col">
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <div className="flex flex-wrap gap-2">
+    <Link href={href}>
+      <Card className="hover:bg-muted/50 transition-colors h-[180px]">
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2 max-w-[70%]">
+              <Mail className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
+              <CardTitle className="text-base truncate">
+                {template.name}
+              </CardTitle>
+            </div>
             <Badge
               variant="secondary"
-              className="px-2.5 py-0.5 text-xs font-medium bg-primary/15 text-primary hover:bg-primary/25 transition-colors"
-            >
-              {template.status}
-            </Badge>
-            <Badge
-              variant="secondary"
-              className="px-2.5 py-0.5 text-xs font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+              className={categoryColors[template.category]}
             >
               {template.category}
             </Badge>
           </div>
-          <Badge
-            variant="outline"
-            className="border-border/40 bg-background/60 text-muted-foreground group-hover:bg-background/80 group-hover:border-border/60 transition-colors"
-          >
-            {template.joinedCount}
-          </Badge>
-        </div>
-        <CardTitle className="text-xl mt-4 text-foreground/90 group-hover:text-foreground transition-colors">
-          {template.title}
-        </CardTitle>
-        <CardDescription className="min-h-[48px] text-muted-foreground">
-          {template.description}
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="flex-grow">
-        <div className="relative group h-[200px]">
-          {template.link && (
-            <iframe
-              src={template.link}
-              className="w-full h-full border-0 rounded-md"
-              title="Template Preview"
-            />
-          )}
-          {/* {!imageError ? (
-            <Image
-              src={`/templates/${template.id}.jpg`}
-              alt={template.title}
-              fill
-              className="object-cover rounded-md"
-              onError={() => setImageError(true)}
-            />
-          ) : (
-            <iframe
-              src={template.link}
-              className="w-full h-full border-0 rounded-md"
-              title="Template Preview"
-            />
-          )} */}
-          <button
-            className="rounded-md absolute inset-0 flex items-center justify-center text-white cursor-pointer bg-black transition-all duration-300 ease-in-out bg-opacity-0 group-hover:bg-opacity-50"
-            onClick={handleClick}
-          >
-            <span className="transform scale-95 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300 ease-in-out">
-              Click to view full preview
-            </span>
-          </button>
-        </div>
-      </CardContent>
-      <CardFooter>
-        <Button
-          className="w-full relative overflow-hidden group/button bg-primary hover:bg-primary/90"
-          size="lg"
-          variant="default"
-          asChild
-        >
-          <Link href={template.link} target="_blank">
-            <span className="relative z-10 flex items-center">
-              Live Preview
-              <SquareArrowOutUpRight className="w-4 h-4 ml-2" />
-            </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary-foreground/20 opacity-0 group-hover/button:opacity-100 transition-opacity" />
-          </Link>
-        </Button>
-      </CardFooter>
-    </Card>
+          <CardDescription className="line-clamp-2">
+            {template.description}
+          </CardDescription>
+          <CardDescription className="text-xs mt-auto">
+            Last updated: {template.updatedAt}
+          </CardDescription>
+        </CardHeader>
+      </Card>
+    </Link>
   )
 }

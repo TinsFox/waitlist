@@ -105,3 +105,15 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.preview-content {
+  @apply rounded-lg border bg-card p-6;
+}
+
+.preview-content img {
+  @apply max-w-full h-auto;
+}
+
+.preview-content a {
+  @apply text-primary hover:underline;
+}
