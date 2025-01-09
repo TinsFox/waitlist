@@ -11,12 +11,17 @@ import {
   Settings2,
   List,
   Users,
+  Folder,
+  Share,
+  Trash2,
+  Mail,
+  FileText,
+  Share2,
+  BarChart,
 } from "lucide-react"
 import Link from "next/link"
 
-import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
-import { NavSecondary } from "@/components/nav-secondary"
+import { NavGroup } from "@/components/nav-group"
 import { NavUser } from "@/components/nav-user"
 import {
   Sidebar,
@@ -27,74 +32,212 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import type { NavSection } from "@/types/navigation"
 
-const data = {
-  navMain: [
-    {
-      title: "Dashboard",
-      url: "/dashboard",
-      icon: PieChart,
-    },
-    {
-      title: "Users",
-      url: "/users",
-      icon: Users,
-    },
-    {
-      title: "Waitlists",
-      url: "/waitlists",
-      icon: List,
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-      ],
-    },
-  ],
-  navSecondary: [
-    {
-      title: "Support",
-      url: "#",
-      icon: LifeBuoy,
-    },
-    {
-      title: "Feedback",
-      url: "#",
-      icon: Send,
-    },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    },
-  ],
-}
+export const navigationData: NavSection[] = [
+  {
+    label: "Overview",
+    items: [
+      {
+        title: "Dashboard",
+        url: "/dashboard",
+        icon: PieChart,
+      },
+      {
+        title: "Waitlists",
+        url: "/waitlists",
+        icon: List,
+        items: [
+          {
+            title: "Users",
+            url: "/waitlists",
+          },
+          {
+            title: "Active Lists",
+            url: "/waitlists/active",
+          },
+          {
+            title: "Archived",
+            url: "/waitlists/archived",
+          },
+        ],
+      },
+      {
+        title: "User Management",
+        url: "/users",
+        icon: Users,
+        items: [
+          {
+            title: "User List",
+            url: "/users/list",
+          },
+          {
+            title: "User Analytics",
+            url: "/users/analytics",
+          },
+          {
+            title: "Invitations",
+            url: "/users/invitations",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Operations",
+    items: [
+      {
+        title: "Campaigns",
+        url: "/campaigns",
+        icon: Send,
+      },
+      {
+        title: "Email Templates",
+        url: "/email-templates",
+        icon: Mail,
+      },
+      {
+        title: "Form Builder",
+        url: "/forms",
+        icon: FileText,
+      },
+      {
+        title: "Integrations",
+        url: "/integrations",
+        icon: Share2,
+      },
+    ],
+  },
+  {
+    label: "System",
+    items: [
+      {
+        title: "Settings",
+        url: "/settings",
+        icon: Settings2,
+        items: [
+          {
+            title: "General",
+            url: "/settings/general",
+          },
+          {
+            title: "Team",
+            url: "/settings/team",
+          },
+          {
+            title: "API",
+            url: "/settings/api",
+          },
+          {
+            title: "Billing",
+            url: "/settings/billing",
+          },
+        ],
+      },
+      {
+        title: "Analytics",
+        url: "/analytics",
+        icon: BarChart,
+        items: [
+          {
+            title: "Conversion",
+            url: "/analytics/conversion",
+          },
+          {
+            title: "Growth",
+            url: "/analytics/growth",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Projects",
+    items: [
+      {
+        title: "Design Engineering",
+        url: "#",
+        icon: Frame,
+        actions: [
+          {
+            icon: Folder,
+            label: "View Project",
+          },
+          {
+            icon: Share,
+            label: "Share Project",
+          },
+          {
+            icon: Trash2,
+            label: "Delete Project",
+          },
+        ],
+      },
+      {
+        title: "Sales & Marketing",
+        url: "#",
+        icon: PieChart,
+        actions: [
+          {
+            icon: Folder,
+            label: "View Project",
+          },
+          {
+            icon: Share,
+            label: "Share Project",
+          },
+          {
+            icon: Trash2,
+            label: "Delete Project",
+          },
+        ],
+      },
+      {
+        title: "Travel",
+        url: "#",
+        icon: Map,
+        actions: [
+          {
+            icon: Folder,
+            label: "View Project",
+          },
+          {
+            icon: Share,
+            label: "Share Project",
+          },
+          {
+            icon: Trash2,
+            label: "Delete Project",
+          },
+        ],
+      },
+    ],
+    hideOnCollapse: true,
+    showMoreButton: true,
+  },
+  {
+    label: "Support",
+    items: [
+      {
+        title: "Landing Pages",
+        url: "/",
+        icon: FileText,
+        target: "_blank",
+      },
+      {
+        title: "Support",
+        url: "#",
+        icon: LifeBuoy,
+      },
+      {
+        title: "Feedback",
+        url: "#",
+        icon: Send,
+      },
+    ],
+    className: "mt-auto",
+  },
+]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -117,9 +260,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        {navigationData.map((section) => (
+          <NavGroup
+            key={section.label}
+            label={section.label}
+            items={section.items}
+            hideOnCollapse={section.hideOnCollapse}
+            showMoreButton={section.showMoreButton}
+            className={section.className}
+          />
+        ))}
       </SidebarContent>
       <SidebarFooter>
         <NavUser />
