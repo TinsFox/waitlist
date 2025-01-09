@@ -1,27 +1,34 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { notFound, useParams } from "next/navigation"
 import { TemplateEditor } from "@/components/email-templates/template-editor"
-
-const DEMO_TEMPLATES = [
-  {
-    id: "1",
-    name: "Welcome Email",
-    description: "Send to new users when they sign up",
-    category: "onboarding",
-    subject: "Welcome to Our Platform!",
-    content:
-      "Hi {{ user_name }},\n\nWelcome to {{ company_name }}! We're excited to have you on board.",
-    updatedAt: new Date().toISOString(),
-  },
-]
+import { emailService } from "@/lib/email-service"
+import { EmailTemplate } from "@/types/email"
 
 export default function EmailTemplatePage() {
   const params = useParams()
-  const template = DEMO_TEMPLATES.find((t) => t.id === params.id)
+  const [template, setTemplate] = useState<EmailTemplate | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const loadTemplate = async () => {
+      const template = await emailService.getTemplate(params.id as string)
+      if (!template) {
+        notFound()
+      }
+      setTemplate(template)
+      setLoading(false)
+    }
+    loadTemplate()
+  }, [params.id])
+
+  if (loading) {
+    return <div>Loading...</div>
+  }
 
   if (!template) {
-    notFound()
+    return null
   }
 
   return (
@@ -34,6 +41,7 @@ export default function EmailTemplatePage() {
             category: template.category,
             subject: template.subject,
             content: template.content,
+            variables: template.variables,
           }}
           mode="edit"
         />

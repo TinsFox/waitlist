@@ -1,29 +1,63 @@
-interface SendEmailParams {
-  subject: string
-  content: string
-  recipients: string[]
-}
+import { EmailTemplate, CreateEmailTemplateInput } from "@/types/email"
 
 export const emailService = {
-  sendEmail: async ({ subject, content, recipients }: SendEmailParams) => {
-    // TODO: 实现实际的邮件发送逻辑
-    // 这里可以调用你的后端 API 或邮件服务提供商的 API
-    const response = await fetch("/api/email/send", {
+  getTemplates: async (): Promise<EmailTemplate[]> => {
+    const res = await fetch("/api/email-templates")
+    const data = await res.json()
+    return data.templates
+  },
+
+  getTemplate: async (id: string): Promise<EmailTemplate | undefined> => {
+    const res = await fetch(`/api/email-templates/${id}`)
+    if (!res.ok) return undefined
+    const data = await res.json()
+    return data.template
+  },
+
+  createTemplate: async (
+    template: CreateEmailTemplateInput
+  ): Promise<EmailTemplate> => {
+    const res = await fetch("/api/email-templates", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        subject,
-        content,
-        recipients,
-      }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(template),
     })
+    const data = await res.json()
+    return data.template
+  },
 
-    if (!response.ok) {
-      throw new Error("Failed to send email")
-    }
+  updateTemplate: async (
+    id: string,
+    template: Partial<CreateEmailTemplateInput>
+  ): Promise<EmailTemplate> => {
+    const res = await fetch(`/api/email-templates/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(template),
+    })
+    const data = await res.json()
+    return data.template
+  },
 
-    return response.json()
+  deleteTemplate: async (id: string): Promise<EmailTemplate> => {
+    const res = await fetch(`/api/email-templates/${id}`, {
+      method: "DELETE",
+    })
+    const data = await res.json()
+    return data.template
+  },
+
+  sendEmail: async (params: {
+    templateId?: number
+    subject: string
+    content: string
+    recipients: string[]
+  }) => {
+    const res = await fetch("/api/email/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(params),
+    })
+    return res.json()
   },
 }

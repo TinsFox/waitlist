@@ -16,11 +16,12 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { Eye, RefreshCw, Variable } from "lucide-react"
+import { RefreshCw, Variable } from "lucide-react"
 
 interface TemplatePreviewProps {
   content: string
   subject: string
+  variables: Record<string, string>
 }
 
 const DEFAULT_VARIABLES = {

@@ -8,23 +8,18 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination"
-import { useQueryState } from "nuqs"
 
 interface PaginationControlsProps {
-  total: number
+  page: number
+  onPageChange: (page: number) => void
+  totalPages: number
 }
 
-export function PaginationControls({ total }: PaginationControlsProps) {
-  const [page, setPage] = useQueryState("page", {
-    defaultValue: "1",
-    parse: (value) => value,
-  })
-  const [perPage] = useQueryState("per_page", {
-    defaultValue: "10",
-    parse: (value) => value,
-  })
-
-  const totalPages = Math.ceil(total / Number(perPage))
+export function PaginationControls({
+  page,
+  onPageChange,
+  totalPages,
+}: PaginationControlsProps) {
   const currentPage = Number(page)
 
   return (
@@ -33,7 +28,7 @@ export function PaginationControls({ total }: PaginationControlsProps) {
         <PaginationItem>
           <PaginationPrevious
             href="#"
-            onClick={() => setPage(String(currentPage - 1))}
+            onClick={() => onPageChange(currentPage - 1)}
             isActive={currentPage > 1}
           />
         </PaginationItem>
@@ -41,7 +36,7 @@ export function PaginationControls({ total }: PaginationControlsProps) {
           <PaginationItem key={i}>
             <PaginationLink
               href="#"
-              onClick={() => setPage(String(i + 1))}
+              onClick={() => onPageChange(i + 1)}
               isActive={currentPage === i + 1}
             >
               {i + 1}
@@ -51,7 +46,7 @@ export function PaginationControls({ total }: PaginationControlsProps) {
         <PaginationItem>
           <PaginationNext
             href="#"
-            onClick={() => setPage(String(currentPage + 1))}
+            onClick={() => onPageChange(currentPage + 1)}
             isActive={currentPage < totalPages}
           />
         </PaginationItem>

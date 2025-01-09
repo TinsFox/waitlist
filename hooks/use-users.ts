@@ -16,7 +16,7 @@ export function useUsers({
   sortBy = "createdAt",
   sortDirection = "desc",
 }: UseUsersParams) {
-  return useQuery({
+  const { data, error, isLoading } = useQuery({
     queryKey: ["users", page, searchTerm, sortBy, sortDirection],
     queryFn: async () => {
       return authClient.admin.listUsers({
@@ -34,4 +34,10 @@ export function useUsers({
       })
     },
   })
+
+  return {
+    data: data?.data?.users || [],
+    error,
+    isLoading,
+  }
 }

@@ -1,17 +1,31 @@
 import { NextResponse } from "next/server"
+import { db } from "@/lib/db"
+import { emailTemplates } from "@/lib/db/schema"
+import { desc } from "drizzle-orm"
 
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { name, subject, content } = body
+    const { name, subject, content, description, category } = body
 
-    // TODO: 实现保存模板到数据库的逻辑
-    // 这里你需要根据你的数据库实现来保存模板
+    const [newTemplate] = await db
+      .insert(emailTemplates)
+      .values({
+        name,
+        subject,
+        content,
+        description,
+        category: category || "general",
+      })
+      .returning()
 
-    return NextResponse.json({ success: true })
+    return NextResponse.json({ success: true, template: newTemplate })
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to save template" },
+      {
+        error: "Failed to save template",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
       { status: 500 }
     )
   }
@@ -19,21 +33,19 @@ export async function POST(request: Request) {
 
 export async function GET() {
   try {
-    // TODO: 实现从数据库获取模板列表的逻辑
-    const templates = [
-      {
-        id: "1",
-        name: "Welcome Email",
-        subject: "Welcome to our platform!",
-        content: "Hi {name},\n\nWelcome to our platform...",
-      },
-      // ... 其他模板
-    ]
+    // 从数据库获取所有模板，按创建时间降序排序
+    const templates = await db
+      .select()
+      .from(emailTemplates)
+      .orderBy(desc(emailTemplates.createdAt))
 
     return NextResponse.json({ templates })
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to fetch templates" },
+      {
+        error: "Failed to fetch templates",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
       { status: 500 }
     )
   }

@@ -15,7 +15,6 @@ import { searchParamsSchema } from "@/lib/search-params-schema"
 import { SortDirection, useUsers } from "@/hooks/use-users"
 import { UserActions } from "./user-actions"
 import { PaginationControls } from "./pagination-controls"
-import type { UserWithRole } from "@/lib/types"
 
 export function UsersTable() {
   const [searchTerm, setSearchTerm] = useQueryState(
@@ -63,7 +62,7 @@ export function UsersTable() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {(data?.data?.users || []).map((user: UserWithRole) => (
+            {data?.map((user) => (
               <TableRow key={user.id}>
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
@@ -85,7 +84,7 @@ export function UsersTable() {
       </div>
 
       <PaginationControls
-        currentPage={page || 1}
+        page={page || 1}
         onPageChange={setPage}
         totalPages={10}
       />

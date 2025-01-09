@@ -1,12 +1,10 @@
-import { Metadata } from "next"
+"use client"
 import { FormEditor } from "@/components/forms/form-editor"
+import { useParams } from "next/navigation"
 
-export const metadata: Metadata = {
-  title: "Edit Form",
-  description: "Edit your waitlist registration form",
-}
+export default function EditFormPage() {
+  const params = useParams<{ id: string }>()
 
-export default function EditFormPage({ params }: { params: { id: string } }) {
   return (
     <div className="flex flex-col gap-6">
       <FormEditor formId={params.id} />

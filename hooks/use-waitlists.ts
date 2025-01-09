@@ -13,7 +13,7 @@ export function useWaitlists() {
   const perPage = searchParams.get("per_page") || "10"
   const search = searchParams.get("search") || ""
 
-  return useQuery<WaitlistsResponse>({
+  const { data, error, isLoading } = useQuery<WaitlistsResponse>({
     queryKey: ["waitlists", page, perPage, search],
     queryFn: async () => {
       const response = await fetch(
@@ -25,4 +25,6 @@ export function useWaitlists() {
       return response.json()
     },
   })
+
+  return { data, error, isLoading, total: data?.total || 0 }
 }

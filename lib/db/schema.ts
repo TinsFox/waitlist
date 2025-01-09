@@ -6,6 +6,9 @@ import {
   text,
   integer,
   pgEnum,
+  boolean,
+  json,
+  uuid,
 } from "drizzle-orm/pg-core"
 
 export const emailStatusEnum = pgEnum("email_status", [
@@ -19,6 +22,12 @@ export const templateEnum = pgEnum("template_type", [
   "welcome",
   "notification",
   "update",
+])
+export const templateCategoryEnum = pgEnum("template_category", [
+  "onboarding",
+  "marketing",
+  "notification",
+  "general",
 ])
 
 export const waitlists = pgTable("waitlists", {
@@ -66,3 +75,67 @@ export const waitlistTemplates = pgTable("waitlist_templates", {
 
 export type WaitlistTemplate = typeof waitlistTemplates.$inferSelect
 export type NewWaitlistTemplate = typeof waitlistTemplates.$inferInsert
+
+export const emailTemplates = pgTable("email_templates", {
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  description: text("description"),
+  category: templateCategoryEnum("category").default("general"),
+  subject: varchar("subject", { length: 255 }).notNull(),
+  content: text("content").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+})
+
+export type EmailTemplate = typeof emailTemplates.$inferSelect
+export type NewEmailTemplate = typeof emailTemplates.$inferInsert
+
+export const emailSendLogs = pgTable("email_send_logs", {
+  id: serial("id").primaryKey(),
+  templateId: integer("template_id").references(() => emailTemplates.id),
+  userId: varchar("user_id", { length: 255 }).notNull(),
+  subject: varchar("subject", { length: 255 }).notNull(),
+  content: text("content").notNull(),
+  status: emailStatusEnum("status").default("pending"),
+  errorMessage: text("error_message"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  sentAt: timestamp("sent_at"),
+})
+
+export type EmailSendLog = typeof emailSendLogs.$inferSelect
+export type NewEmailSendLog = typeof emailSendLogs.$inferInsert
+
+export const forms = pgTable("forms", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: text("user_id").notNull(),
+  name: text("name").notNull(),
+  description: text("description"),
+  published: boolean("published").default(false).notNull(),
+  fields: json("fields").$type<Array<FormField>>().default([]),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+})
+
+export type FormField = {
+  id: string
+  type: "text" | "email" | "number" | "textarea" | "select" | "checkbox"
+  label: string
+  placeholder?: string
+  required?: boolean
+  options?: string[] // 用于 select 类型的选项
+  defaultValue?: string | number | boolean
+}
+
+export type Form = typeof forms.$inferSelect
+export type NewForm = typeof forms.$inferInsert
+
+export const formsConfig = {
+  id: forms.id,
+  userId: forms.userId,
+  name: forms.name,
+  description: forms.description,
+  published: forms.published,
+  fields: forms.fields,
+  createdAt: forms.createdAt,
+  updatedAt: forms.updatedAt,
+}

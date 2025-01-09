@@ -22,14 +22,10 @@ import {
 } from "@/components/ui/select"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { TemplatePreview } from "@/components/email-templates/template-preview"
+import { EmailTemplate } from "@/types/email"
 
 interface TemplateEditorProps {
-  initialTemplate?: {
-    name: string
-    subject: string
-    category: string
-    content: string
-  }
+  initialTemplate?: Omit<EmailTemplate, "id">
   mode?: "create" | "edit"
 }
 
@@ -44,6 +40,7 @@ export function TemplateEditor({
     subject: initialTemplate?.subject || "",
     category: initialTemplate?.category || "",
     content: initialTemplate?.content || "",
+    variables: initialTemplate?.variables || {},
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -141,6 +138,7 @@ export function TemplateEditor({
               <TemplatePreview
                 content={template.content}
                 subject={template.subject}
+                variables={template.variables}
               />
             </TabsContent>
           </Tabs>

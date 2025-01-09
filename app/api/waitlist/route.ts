@@ -2,30 +2,41 @@ import { NextResponse } from "next/server"
 import { db } from "@/lib/db"
 import { waitlists } from "@/lib/db/schema"
 import { eq } from "drizzle-orm"
+import { z } from "zod"
+
+const schema = z.object({
+  email: z.string().email("please enter a valid email address"),
+  name: z.string().optional(),
+  company: z.string().optional(),
+  message: z.string().optional(),
+})
 
 export async function POST(request: Request) {
   try {
     const body = await request.json()
     const { email, name, company, message } = body
 
-    // 验证邮箱
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return NextResponse.json(
-        { error: "请输入有效的邮箱地址" },
-        { status: 400 }
-      )
+    try {
+      schema.parse(body)
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return NextResponse.json(
+          { error: error.errors[0].message },
+          { status: 400 }
+        )
+      }
     }
-
-    // 检查邮箱是否已存在
     const existing = await db
       .select()
       .from(waitlists)
       .where(eq(waitlists.email, email))
     if (existing.length > 0) {
-      return NextResponse.json({ error: "该邮箱已经注册" }, { status: 400 })
+      return NextResponse.json(
+        { error: "the email has been registered" },
+        { status: 400 }
+      )
     }
 
-    // 插入数据
     const result = await db
       .insert(waitlists)
       .values({
@@ -39,7 +50,10 @@ export async function POST(request: Request) {
     return NextResponse.json(result[0])
   } catch (error) {
     console.error("Waitlist registration error:", error)
-    return NextResponse.json({ error: "注册失败，请稍后重试" }, { status: 500 })
+    return NextResponse.json(
+      { error: "registration failed, please try again later" },
+      { status: 500 }
+    )
   }
 }
 
@@ -52,6 +66,6 @@ export async function GET() {
     return NextResponse.json(result)
   } catch (error) {
     console.error("Fetching waitlist error:", error)
-    return NextResponse.json({ error: "获取数据失败" }, { status: 500 })
+    return NextResponse.json({ error: "fetching data failed" }, { status: 500 })
   }
 }

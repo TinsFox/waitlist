@@ -19,6 +19,8 @@ interface Template {
 interface TemplateCardProps {
   template: Template
   href: string
+  index: number
+  templates: Template[]
 }
 
 const categoryColors: Record<string, string> = {
@@ -31,7 +33,12 @@ const categoryColors: Record<string, string> = {
     "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300",
 }
 
-export function TemplateCard({ template, href }: TemplateCardProps) {
+export function TemplateCard({
+  template,
+  href,
+  index,
+  templates,
+}: TemplateCardProps) {
   return (
     <Link href={href}>
       <Card className="hover:bg-muted/50 transition-colors h-[180px]">

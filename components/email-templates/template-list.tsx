@@ -86,10 +86,12 @@ export function TemplateList() {
         </div>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredTemplates.map((template) => (
+          {filteredTemplates.map((template, index) => (
             <TemplateCard
               key={template.id}
               template={template}
+              index={index}
+              templates={filteredTemplates}
               href={`/email-templates/${template.id}`}
             />
           ))}

@@ -11,9 +11,10 @@ import { Button } from "@/components/ui/button"
 import { MoreHorizontal } from "lucide-react"
 import { authClient } from "@/lib/auth-client"
 import { useQueryClient } from "@tanstack/react-query"
+import type { UserWithRole } from "better-auth/plugins"
 
 interface UserActionsProps {
-  user: any // Replace with your user type
+  user: UserWithRole
 }
 
 export function UserActions({ user }: UserActionsProps) {

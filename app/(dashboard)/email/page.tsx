@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useUsers } from "@/hooks/use-users"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -33,33 +33,14 @@ import {
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { emailFormSchema, type EmailFormValues } from "@/lib/validations/email"
-
-interface EmailTemplate {
-  id: string
-  name: string
-  subject: string
-  content: string
-}
-
-const templates: EmailTemplate[] = [
-  {
-    id: "1",
-    name: "Welcome Email",
-    subject: "Welcome to our platform!",
-    content: "Hi {name},\n\nWelcome to our platform...",
-  },
-  {
-    id: "2",
-    name: "Newsletter",
-    subject: "Monthly Newsletter",
-    content: "Here's what's new this month...",
-  },
-]
+import { emailService } from "@/lib/email-service"
+import { EmailTemplate } from "@/types/email"
 
 export default function EmailPage() {
   const [isSending, setIsSending] = useState(false)
   const [isTemplateDialogOpen, setIsTemplateDialogOpen] = useState(false)
   const [newTemplateName, setNewTemplateName] = useState("")
+  const [templates, setTemplates] = useState<EmailTemplate[]>([])
 
   const form = useForm<EmailFormValues>({
     resolver: zodResolver(emailFormSchema),
@@ -68,6 +49,7 @@ export default function EmailPage() {
       content: "",
       recipients: [],
       templateId: "",
+      variables: {},
     },
   })
 
@@ -76,6 +58,14 @@ export default function EmailPage() {
     sortBy: "createdAt",
     sortDirection: "desc",
   })
+
+  useEffect(() => {
+    const loadTemplates = async () => {
+      const templates = await emailService.getTemplates()
+      setTemplates(templates)
+    }
+    loadTemplates()
+  }, [])
 
   const handleTemplateSelect = (templateId: string) => {
     const template = templates.find((t) => t.id === templateId)
@@ -93,21 +83,21 @@ export default function EmailPage() {
     }
 
     try {
-      await fetch("/api/email/templates", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: newTemplateName,
-          subject: form.getValues("subject"),
-          content: form.getValues("content"),
-        }),
+      const newTemplate = await emailService.createTemplate({
+        name: newTemplateName,
+        subject: form.getValues("subject"),
+        content: form.getValues("content"),
+        variables: form.getValues("variables"),
       })
 
+      setTemplates((prev) => [...prev, newTemplate])
       toast.success("Template saved successfully")
       setIsTemplateDialogOpen(false)
       setNewTemplateName("")
     } catch (error) {
-      toast.error("Failed to save template")
+      toast.error("Failed to save template", {
+        description: error instanceof Error ? error.message : "Unknown error",
+      })
     }
   }
 
@@ -119,10 +109,10 @@ export default function EmailPage() {
 
     setIsSending(true)
     try {
-      await fetch("/api/email/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+      await emailService.sendEmail({
+        subject: values.subject,
+        content: values.content,
+        recipients: values.recipients,
       })
 
       toast.success("Emails sent successfully")
@@ -257,7 +247,7 @@ export default function EmailPage() {
               <FormItem>
                 <FormLabel>Select Recipients</FormLabel>
                 <div className="border rounded-lg p-4 max-h-60 overflow-y-auto space-y-2">
-                  {(usersData?.data?.users || []).map((user) => (
+                  {usersData?.map((user) => (
                     <div key={user.id} className="flex items-center space-x-2">
                       <Checkbox
                         id={user.id}

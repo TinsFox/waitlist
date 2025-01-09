@@ -15,6 +15,12 @@ interface WaitlistActionsProps {
 }
 
 export function WaitlistActions({ waitlist }: WaitlistActionsProps) {
+  const handleSendEmail = () => {
+    console.log("Send Email")
+  }
+  const handleDelete = () => {
+    console.log("Delete")
+  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -23,11 +29,11 @@ export function WaitlistActions({ waitlist }: WaitlistActionsProps) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem>
+        <DropdownMenuItem onSelectCapture={handleSendEmail}>
           <Send className="mr-2 h-4 w-4" />
           Send Email
         </DropdownMenuItem>
-        <DropdownMenuItem className="text-destructive">
+        <DropdownMenuItem className="text-destructive" onClick={handleDelete}>
           <Trash className="mr-2 h-4 w-4" />
           Delete
         </DropdownMenuItem>

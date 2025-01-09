@@ -16,4 +16,6 @@ export interface WaitlistTemplate {
   joinedCount: string
   category: string
   link: string
+  name: string
+  updatedAt: string
 }
