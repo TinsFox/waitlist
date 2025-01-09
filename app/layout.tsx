@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/sonner"
 import { ViewTransitions } from "next-view-transitions"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
+import { ReactQueryProviders } from "./providers"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -118,7 +119,9 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <TooltipProvider>
-              <NuqsAdapter>{children}</NuqsAdapter>
+              <ReactQueryProviders>
+                <NuqsAdapter>{children}</NuqsAdapter>
+              </ReactQueryProviders>
               <Toaster />
             </TooltipProvider>
           </ThemeProvider>

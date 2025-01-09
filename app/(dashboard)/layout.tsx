@@ -14,6 +14,8 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { cookies } from "next/headers"
+import { headers } from "next/headers"
+import { auth } from "@/lib/auth"
 
 export default async function DashboardLayout({
   children,
@@ -22,7 +24,12 @@ export default async function DashboardLayout({
 }>) {
   const cookieStore = await cookies()
   const defaultOpen = cookieStore.get("sidebar:state")?.value === "true"
-
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  })
+  if (!session) {
+    return <div>Not authenticated</div>
+  }
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
       <AppSidebar />
