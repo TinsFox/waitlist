@@ -106,21 +106,7 @@ export default function PrivacyPolicy() {
               If you have any questions or comments about this Privacy Policy,
               please do not hesitate to contact us at:
             </p>
-            <div className="space-y-2">
-              <p>
-                <strong>Email:</strong> support@afjs.dev
-              </p>
-              <p>
-                <strong>Address:</strong> Your Company Address
-              </p>
-            </div>
           </section>
-
-          <div className="pt-8">
-            <Button asChild variant="outline">
-              <Link href="/">← Back to Home</Link>
-            </Button>
-          </div>
         </div>
       </div>
     </main>
