@@ -12,8 +12,9 @@ export async function GET(
     .select()
     .from(waitlistTemplates)
     .where(eq(waitlistTemplates.id, Number(id)))
+    .limit(1)
 
-  if (!waitlist) {
+  if (!waitlist || waitlist.length === 0) {
     return NextResponse.json({ error: "Waitlist not found" }, { status: 404 })
   }
 

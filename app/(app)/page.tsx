@@ -1,15 +1,10 @@
-import { SiteFooter } from "@/components/site-footer"
-import { SiteHeader } from "@/components/site-header"
 import { HeroSection } from "@/components/hero-section"
 import { SearchFilters } from "@/components/search-filters"
-import type { SearchParams } from "nuqs/server"
+
 import { Suspense } from "react"
 import { FilteredTemplates } from "@/components/filtered-templates"
 import { Skeleton } from "@/components/ui/skeleton"
-
-type PageProps = {
-  searchParams: Promise<SearchParams>
-}
+import type { PageProps } from "@/types/params"
 
 export default async function Home({ searchParams }: PageProps) {
   return (

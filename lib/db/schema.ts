@@ -66,6 +66,7 @@ export type NewEmail = typeof emails.$inferInsert
 export const waitlistTemplates = pgTable("waitlist_templates", {
   id: serial("id").primaryKey(),
   title: varchar("title", { length: 100 }),
+  slug: varchar("slug", { length: 100 }).unique(),
   description: text("description"),
   link: varchar("link", { length: 255 }),
   category: varchar("category", { length: 100 }),

@@ -8,6 +8,8 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { getTemplateLink } from "@/lib/utils"
+
 type ViewportSize = "desktop" | "tablet" | "mobile" | "fullscreen"
 
 interface PreviewControlsProps {
@@ -79,7 +81,7 @@ export function PreviewControls({
               asChild
               title="Open in New Tab"
             >
-              <Link href={template.link} target="_blank">
+              <Link href={getTemplateLink(template.link)} target="_blank">
                 <span className="sr-only">Open in New Tab</span>
                 <Fullscreen className="size-3.5" />
               </Link>

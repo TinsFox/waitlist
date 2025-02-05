@@ -13,7 +13,7 @@ async function getWaitlistTemplates(): Promise<WaitlistTemplate[]> {
   if (!res.ok) {
     throw new Error("Failed to fetch waitlist templates")
   }
-  return res.json()
+  return res.json() as Promise<WaitlistTemplate[]>
 }
 
 export async function FilteredTemplates({

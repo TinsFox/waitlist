@@ -36,6 +36,13 @@
       "when": 1736326467527,
       "tag": "0004_daily_princess_powerful",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1738756441906,
+      "tag": "0005_complex_nitro",
+      "breakpoints": true
     }
   ]
 }

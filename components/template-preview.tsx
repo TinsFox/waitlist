@@ -16,7 +16,7 @@ import { previewAtom } from "@/lib/atoms"
 import { Button } from "./ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { PreviewControls } from "./preview-controls"
-import { cn } from "@/lib/utils"
+import { cn, getTemplateLink } from "@/lib/utils"
 
 type ViewportSize = "desktop" | "tablet" | "mobile" | "fullscreen"
 
@@ -121,7 +121,7 @@ export function TemplatePreview() {
           >
             {template.link ? (
               <iframe
-                src={template.link}
+                src={`${getTemplateLink(template.link)}?iframe=true`}
                 className="w-full h-full rounded-lg"
                 title="Template Preview"
               />

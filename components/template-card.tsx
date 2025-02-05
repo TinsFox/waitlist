@@ -12,7 +12,7 @@ import { SquareArrowOutUpRight } from "lucide-react"
 import Link from "next/link"
 import { useSetAtom } from "jotai"
 import { previewAtom } from "@/lib/atoms"
-
+import { getTemplateLink } from "@/lib/utils"
 import { WaitlistTemplate } from "@/app/data/waitlists"
 
 interface TemplateCardProps {
@@ -74,9 +74,11 @@ export function TemplateCard({
         <div className="relative group h-[200px]">
           {template.link && (
             <iframe
-              src={template.link}
-              className="w-full h-full border-0 rounded-md"
+              src={`${getTemplateLink(template.link)}?iframe=true`}
+              className="w-full h-full border-0 rounded-md "
               title="Template Preview"
+              scrolling="no"
+              frameBorder="0"
             />
           )}
           <button
@@ -96,7 +98,7 @@ export function TemplateCard({
           variant="default"
           asChild
         >
-          <Link href={template.link} target="_blank">
+          <Link href={getTemplateLink(template.link)} target="_blank">
             <span className="relative z-10 flex items-center">
               Live Preview
               <SquareArrowOutUpRight className="w-4 h-4 ml-2" />

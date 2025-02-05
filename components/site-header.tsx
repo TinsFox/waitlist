@@ -10,7 +10,7 @@ export function SiteHeader() {
   const { data: session, isPending } = authClient.useSession()
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-sm">
+    <header className="sticky top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-sm">
       <div className="max-w-[1200px] mx-auto flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center">
@@ -18,7 +18,7 @@ export function SiteHeader() {
           </Link>
           <nav className="hidden md:flex items-center gap-6">
             <Link
-              href="/"
+              href="/template"
               className="text-sm text-foreground/60 transition-colors hover:text-foreground"
             >
               Templates
