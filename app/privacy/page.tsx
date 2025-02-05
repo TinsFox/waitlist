@@ -5,113 +5,120 @@ import Link from "next/link"
 
 export default function PrivacyPolicy() {
   return (
-    <main className="min-h-screen bg-background">
-      <div className="container max-w-3xl mx-auto px-4 py-16">
-        <div className="space-y-8">
+    <main className="relative mt-16">
+      <div className="container max-w-4xl mx-auto px-6 py-16">
+        <div className="space-y-12">
+          {/* Header Section */}
           <div className="space-y-4">
-            <h1 className="text-4xl font-bold">Privacy Policy</h1>
-            <p className="text-muted-foreground">
-              Last updated: {new Date().toLocaleDateString()}
+            <h1 className="text-4xl font-bold tracking-tight">
+              Privacy Policy
+            </h1>
+            <p className="text-base text-muted-foreground">
+              <strong>Effective date:</strong> {new Date().toLocaleDateString()}
             </p>
           </div>
 
-          <section className="space-y-4">
-            <h2 className="text-2xl font-semibold">Introduction</h2>
-            <p>
-              We respect your privacy and are committed to protecting your
-              personal data. This privacy policy will inform you about how we
-              handle your personal information when you use our iOS application
-              and tell you about your privacy rights.
+          {/* Introduction */}
+          <div className="prose prose-gray dark:prose-invert max-w-none">
+            <p className="text-base leading-7">
+              At Waitlist Templates, we take your privacy seriously. Please read
+              this Privacy Policy to learn how we treat your personal data.
+              <strong>
+                {" "}
+                By using or accessing our Services in any manner, you
+                acknowledge that you accept the practices and policies outlined
+                below, and you hereby consent that we will collect, use and
+                share your information as described in this Privacy Policy.
+              </strong>
             </p>
-          </section>
+          </div>
 
-          <section className="space-y-4">
-            <h2 className="text-2xl font-semibold">Information We Collect</h2>
-            <p>
-              When you use our application, we may collect the following types
-              of information:
-            </p>
-            <ul className="list-disc list-inside space-y-2 ml-4">
-              <li>Email address (when you sign up or log in)</li>
-              <li>Usage data (how you interact with our app)</li>
+          {/* Table of Contents */}
+          <div className="space-y-4">
+            <h2 className="text-xl font-semibold">
+              Privacy Policy Table of Contents
+            </h2>
+            <ul className="space-y-2 text-sm">
               <li>
-                Device information (device type, operating system version)
+                <Link
+                  href="#what-this-covers"
+                  className="text-primary hover:underline"
+                >
+                  What this Privacy Policy Covers
+                </Link>
               </li>
+              <li>
+                <Link
+                  href="#personal-data"
+                  className="text-primary hover:underline"
+                >
+                  Personal Data
+                </Link>
+              </li>
+              {/* Add more table of contents items */}
             </ul>
-          </section>
+          </div>
 
-          <section className="space-y-4">
-            <h2 className="text-2xl font-semibold">
-              How We Use Your Information
+          {/* Main Content Sections */}
+          <section id="what-this-covers" className="space-y-4">
+            <h2 className="text-2xl font-semibold tracking-tight">
+              What this Privacy Policy Covers
             </h2>
-            <p>We use the information we collect to:</p>
-            <ul className="list-disc list-inside space-y-2 ml-4">
-              <li>Provide and maintain our service</li>
-              <li>Notify you about changes to our service</li>
-              <li>Provide customer support</li>
-              <li>Monitor the usage of our service</li>
-              <li>Detect, prevent and address technical issues</li>
-            </ul>
+            <div className="prose prose-gray dark:prose-invert max-w-none">
+              <p className="text-base leading-7">
+                This Privacy Policy covers how we treat Personal Data that we
+                gather when you access or use our Services. "Personal Data"
+                means any information that identifies or relates to a particular
+                individual and also includes information referred to as
+                "personally identifiable information" or "personal information"
+                under applicable data privacy laws, rules or regulations.
+              </p>
+            </div>
           </section>
 
-          <section className="space-y-4">
-            <h2 className="text-2xl font-semibold">Data Security</h2>
-            <p>
-              The security of your data is important to us. We implement
-              appropriate security measures to protect your personal
-              information. However, please be aware that no method of
-              transmission over the Internet or method of electronic storage is
-              100% secure.
-            </p>
-          </section>
-
-          <section className="space-y-4">
-            <h2 className="text-2xl font-semibold">Your Data Rights</h2>
-            <p>You have the right to:</p>
-            <ul className="list-disc list-inside space-y-2 ml-4">
-              <li>Access your personal data</li>
-              <li>Correct inaccurate data</li>
-              <li>Request deletion of your data</li>
-              <li>Object to our processing of your data</li>
-              <li>Data portability</li>
-            </ul>
-          </section>
-
-          <section className="space-y-4">
-            <h2 className="text-2xl font-semibold">Children&apos;s Privacy</h2>
-            <p>
-              Our service does not address anyone under the age of 13. We do not
-              knowingly collect personally identifiable information from
-              children under 13.
-            </p>
-          </section>
-
-          <section className="space-y-4">
-            <h2 className="text-2xl font-semibold">
-              Changes to This Privacy Policy
+          <section id="personal-data" className="space-y-6">
+            <h2 className="text-2xl font-semibold tracking-tight">
+              Personal Data
             </h2>
-            <p>
-              We may update our Privacy Policy from time to time. We will notify
-              you of any changes by posting the new Privacy Policy on this page
-              and updating the &quot;Last updated&quot; date.
-            </p>
+
+            <div className="space-y-4">
+              <h3 className="text-xl font-medium">
+                Categories of Personal Data We Collect
+              </h3>
+              <div className="bg-muted/50 rounded-lg p-6 space-y-4">
+                <h4 className="font-medium">Profile or Contact Data</h4>
+                <ul className="list-disc list-inside space-y-1 text-sm">
+                  <li>First and last name</li>
+                  <li>Email address</li>
+                  <li>Phone number</li>
+                  <li>Unique identifiers such as passwords</li>
+                </ul>
+              </div>
+            </div>
           </section>
 
+          {/* Contact Section */}
           <section className="space-y-4">
-            <h2 className="text-2xl font-semibold">Contact Us</h2>
-            <p>
-              If you have any questions about this Privacy Policy, please
-              contact us:
+            <h2 className="text-2xl font-semibold tracking-tight">
+              Contact Information
+            </h2>
+            <p className="text-base leading-7">
+              If you have any questions or comments about this Privacy Policy,
+              please do not hesitate to contact us at:
             </p>
-            <ul className="list-disc list-inside space-y-2 ml-4">
-              <li>By email: support@example.com</li>
-              <li>By visiting our website: https://example.com/contact</li>
-            </ul>
+            <div className="space-y-2">
+              <p>
+                <strong>Email:</strong> support@afjs.dev
+              </p>
+              <p>
+                <strong>Address:</strong> Your Company Address
+              </p>
+            </div>
           </section>
 
           <div className="pt-8">
-            <Button asChild>
-              <Link href="/">Back to Home</Link>
+            <Button asChild variant="outline">
+              <Link href="/">← Back to Home</Link>
             </Button>
           </div>
         </div>

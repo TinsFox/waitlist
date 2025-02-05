@@ -8,7 +8,8 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
 import { ReactQueryProviders } from "./providers"
 import { MdxProvider } from "@/components/mdx-provider"
-
+import { SiteFooter } from "@/components/site-footer"
+import { SiteHeader } from "@/components/site-header"
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -122,7 +123,17 @@ export default function RootLayout({
             <TooltipProvider>
               <MdxProvider>
                 <ReactQueryProviders>
-                  <NuqsAdapter>{children}</NuqsAdapter>
+                  <NuqsAdapter>
+                    <div className="flex min-h-screen flex-col bg-background relative overflow-hidden">
+                      <div className="absolute inset-0 w-full h-full bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:24px_24px] opacity-[0.1] dark:opacity-[0.08]">
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_400px,hsl(var(--primary))_4%,transparent)] dark:bg-[radial-gradient(circle_800px_at_50%_400px,hsl(var(--primary))_12%,transparent)]" />
+                      </div>
+
+                      <SiteHeader />
+                      {children}
+                      <SiteFooter />
+                    </div>
+                  </NuqsAdapter>
                 </ReactQueryProviders>
                 <Toaster />
               </MdxProvider>
