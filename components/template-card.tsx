@@ -19,12 +19,14 @@ interface TemplateCardProps {
   template: WaitlistTemplate
   index: number
   templates: WaitlistTemplate[]
+  href?: string
 }
 
 export function TemplateCard({
   template,
   index,
   templates,
+  href,
 }: TemplateCardProps) {
   const setPreview = useSetAtom(previewAtom)
 

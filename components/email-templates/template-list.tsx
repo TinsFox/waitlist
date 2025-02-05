@@ -3,14 +3,19 @@
 import { useState, useMemo } from "react"
 import { TemplateCard } from "@/components/template-card"
 import { TemplatesFilters } from "@/components/email-templates/templates-filters"
+import { WaitlistTemplate } from "@/app/data/waitlists"
 
-const DEMO_TEMPLATES = [
+const DEMO_TEMPLATES: WaitlistTemplate[] = [
   {
     id: "1",
     name: "Welcome Email",
     description: "Send to new users when they sign up",
     category: "onboarding",
     updatedAt: "2024-01-15T10:30:00.000Z",
+    title: "Welcome Email",
+    status: "active",
+    joinedCount: "100",
+    link: "https://example.com",
   },
   {
     id: "2",
@@ -18,6 +23,10 @@ const DEMO_TEMPLATES = [
     description: "Password reset instructions",
     category: "transactional",
     updatedAt: "2024-01-14T15:45:00.000Z",
+    title: "Password Reset",
+    status: "active",
+    joinedCount: "100",
+    link: "https://example.com",
   },
   {
     id: "3",
@@ -25,6 +34,10 @@ const DEMO_TEMPLATES = [
     description: "Weekly updates and news",
     category: "marketing",
     updatedAt: "2024-01-13T09:20:00.000Z",
+    title: "Weekly Newsletter",
+    status: "active",
+    joinedCount: "100",
+    link: "https://example.com",
   },
   {
     id: "4",
@@ -32,6 +45,10 @@ const DEMO_TEMPLATES = [
     description: "Send after successful purchase",
     category: "transactional",
     updatedAt: "2024-01-12T16:15:00.000Z",
+    title: "Order Confirmation",
+    status: "active",
+    joinedCount: "100",
+    link: "https://example.com",
   },
   {
     id: "5",
@@ -39,6 +56,10 @@ const DEMO_TEMPLATES = [
     description: "Email verification process",
     category: "onboarding",
     updatedAt: "2024-01-11T11:50:00.000Z",
+    title: "Account Verification",
+    status: "active",
+    joinedCount: "100",
+    link: "https://example.com",
   },
   {
     id: "6",
@@ -46,6 +67,10 @@ const DEMO_TEMPLATES = [
     description: "Special offers and promotions",
     category: "marketing",
     updatedAt: "2024-01-10T14:25:00.000Z",
+    title: "Promotional Campaign",
+    status: "active",
+    joinedCount: "100",
+    link: "https://example.com",
   },
 ]
 
