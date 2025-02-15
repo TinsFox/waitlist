@@ -38,7 +38,7 @@ Some **mdx** text, with a component
 Best regards,
 The Team
 `
-console.log("tailwindConfig", tailwindConfig)
+
 console.log(buttonVariants({ variant: "default" }))
 const EmailTemplate = ({ source }: { source: MDXRemoteSerializeResult }) => {
   if (!source) return null
