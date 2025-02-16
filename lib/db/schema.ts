@@ -10,6 +10,7 @@ import {
   json,
   uuid,
 } from "drizzle-orm/pg-core"
+import { createSelectSchema } from 'drizzle-zod';
 
 export const emailStatusEnum = pgEnum("email_status", [
   "pending",
@@ -76,6 +77,8 @@ export const waitlistTemplates = pgTable("waitlist_templates", {
 
 export type WaitlistTemplate = typeof waitlistTemplates.$inferSelect
 export type NewWaitlistTemplate = typeof waitlistTemplates.$inferInsert
+
+export const waitlistTemplateSelectSchema = createSelectSchema(waitlistTemplates);
 
 export const emailTemplates = pgTable("email_templates", {
   id: serial("id").primaryKey(),

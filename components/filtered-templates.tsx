@@ -1,47 +1,42 @@
-import { searchParamsCache } from "@/app/search-params"
-import { TemplateList } from "@/components/template-list"
-import type { WaitlistTemplate } from "@/app/data/waitlists"
-import type { SearchParams } from "nuqs/server"
-import { env } from "@/env"
+import { searchParamsCache } from "@/app/search-params";
+import { TemplateList } from "@/components/template-list";
+import type { WaitlistTemplate } from "@/app/data/waitlists";
+import type { SearchParams } from "nuqs/server";
 
-async function getWaitlistTemplates(): Promise<WaitlistTemplate[]> {
-  const res = await fetch(`${env.NEXT_PUBLIC_URL}/api/waitlist-templates`, {
-    next: {
-      revalidate: 3600, // 缓存1小时
-    },
-  })
-  if (!res.ok) {
-    throw new Error("Failed to fetch waitlist templates")
-  }
-  return res.json() as Promise<WaitlistTemplate[]>
-}
+import { db } from "@/lib/db";
+import { waitlistTemplates } from "@/lib/db/schema";
+import { eq, and, like, or } from "drizzle-orm";
 
 export async function FilteredTemplates({
   searchParams,
 }: {
-  searchParams: Promise<SearchParams>
+  searchParams: Promise<SearchParams>;
 }) {
   const { q: searchQuery, category: selectedCategory } =
-    await searchParamsCache.parse(searchParams)
+    await searchParamsCache.parse(searchParams);
 
-  const waitlistTemplates = await getWaitlistTemplates()
+  const searchQueryLower = searchQuery.toLowerCase();
 
-  const searchQueryLower = searchQuery.toLowerCase()
 
-  const filteredWaitlists = waitlistTemplates.filter((waitlist) => {
-    if (selectedCategory !== "all" && waitlist.category !== selectedCategory) {
-      return false
-    }
+  const waitlistTemplatesData = (await db
+    .select()
+    .from(waitlistTemplates)
+    .where(
+      and(
+        selectedCategory !== "all"
+          ? eq(waitlistTemplates.category, selectedCategory)
+          : undefined,
+        searchQueryLower
+          ? or(
+            like(waitlistTemplates.title, `%${searchQueryLower}%`),
+            like(waitlistTemplates.description, `%${searchQueryLower}%`)
+          )
+          : undefined
+      )
+    )) as unknown as WaitlistTemplate[];
 
-    if (searchQuery === "") {
-      return true
-    }
-
-    return (
-      waitlist.title.toLowerCase().includes(searchQueryLower) ||
-      waitlist.description.toLowerCase().includes(searchQueryLower)
-    )
-  })
-
-  return <TemplateList templates={filteredWaitlists} />
+  if (waitlistTemplatesData.length === 0) {
+    return <div>There are no waitlists available.</div>;
+  }
+  return <TemplateList templates={waitlistTemplatesData} />;
 }
