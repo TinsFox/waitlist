@@ -1,16 +1,9 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Loader2 } from "lucide-react"
 import { signIn } from "@/lib/auth-client"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -26,6 +19,10 @@ import {
 } from "@/components/ui/form"
 import Link from "next/link"
 import { toast } from "sonner"
+import { authClient } from "@/lib/auth-client"
+import { useRouter } from "next/navigation"
+
+import { motion } from "framer-motion"
 
 const signInSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -37,6 +34,18 @@ type SignInValues = z.infer<typeof signInSchema>
 
 export default function SignIn() {
   const [loading, setLoading] = useState(false)
+  const { data: session, isPending } = authClient.useSession()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (session && !isPending) {
+      const timer = setTimeout(() => {
+        router.replace("/dashboard")
+      }, 3000)
+
+      return () => clearTimeout(timer)
+    }
+  }, [session, isPending, router])
 
   const form = useForm<SignInValues>({
     resolver: zodResolver(signInSchema),
@@ -83,6 +92,34 @@ export default function SignIn() {
       </div>
 
       <div className="relative w-full max-w-sm">
+        {session && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.4,
+              ease: [0.24, 0.25, 0.05, 1]
+            }}
+            className="bg-[#F5F5FF] dark:bg-[#1F1F3D] border border-[#E5E5FF] dark:border-[#2F2F5F]
+              rounded-md p-3.5 mb-6"
+          >
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{
+                delay: 0.1,
+                duration: 0.4
+              }}
+              className="flex items-center justify-center space-x-2"
+            >
+              <div className="w-1.5 h-1.5 rounded-full bg-blue-500 dark:bg-blue-400" />
+              <p className="text-sm text-[#4B4B60] dark:text-[#E5E5FF] font-medium">
+                Signed in successfully. Redirecting...
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+
         <div className="mb-8 text-center">
           <h1 className="text-2xl font-medium tracking-tight text-gray-900 dark:text-white mb-2">
             Sign in to continue
@@ -93,7 +130,10 @@ export default function SignIn() {
         </div>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className={`space-y-4 ${session ? 'opacity-50 pointer-events-none' : ''}`}
+          >
             <FormField
               control={form.control}
               name="email"
