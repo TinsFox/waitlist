@@ -75,113 +75,130 @@ export default function SignIn() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black/95 px-4">
-      <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 via-purple-500/10 to-pink-500/10" />
-      <Card className="w-full max-w-md border-neutral-800 bg-black/60 backdrop-blur-xl">
-        <CardHeader className="space-y-3">
-          <CardTitle className="text-2xl font-medium text-white">
-            Welcome back
-          </CardTitle>
-          <CardDescription className="text-neutral-400">
-            Enter your details to sign in to your account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-neutral-200">Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="name@example.com"
-                        className="border-neutral-800 bg-neutral-900/50 text-neutral-100 placeholder:text-neutral-500 focus:border-neutral-700 focus:ring-neutral-700"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+    <div className="min-h-screen flex items-center justify-center bg-white dark:bg-[#000000] px-4">
+      <div className="fixed inset-0">
+        <div className="absolute inset-0 bg-gradient-to-tr from-gray-50 to-white dark:from-[#1F1F1F] dark:to-black" />
+        <div className="absolute top-[-10%] right-[0%] w-[500px] h-[500px] bg-blue-500/5 dark:bg-purple-500/10 rounded-full blur-[100px]" />
+        <div className="absolute bottom-[-10%] left-[0%] w-[500px] h-[500px] bg-purple-500/5 dark:bg-blue-500/10 rounded-full blur-[100px]" />
+      </div>
 
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <div className="flex justify-between items-center">
-                      <FormLabel className="text-neutral-200">
-                        Password
-                      </FormLabel>
-                      <Link
-                        href="/forget-password"
-                        className="text-sm text-purple-400 hover:text-purple-300 transition-colors"
-                      >
-                        Forgot password?
-                      </Link>
-                    </div>
-                    <FormControl>
-                      <Input
-                        type="password"
-                        placeholder="Enter your password"
-                        className="border-neutral-800 bg-neutral-900/50 text-neutral-100 placeholder:text-neutral-500 focus:border-neutral-700 focus:ring-neutral-700"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+      <div className="relative w-full max-w-sm">
+        <div className="mb-8 text-center">
+          <h1 className="text-2xl font-medium tracking-tight text-gray-900 dark:text-white mb-2">
+            Sign in to continue
+          </h1>
+          <p className="text-sm text-gray-500 dark:text-neutral-400">
+            Enter your details to access your account
+          </p>
+        </div>
 
-              <FormField
-                control={form.control}
-                name="rememberMe"
-                render={({ field }) => (
-                  <FormItem className="flex items-center space-x-2 space-y-0">
-                    <FormControl>
-                      <Checkbox
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                        className="border-neutral-700 data-[state=checked]:bg-purple-600 data-[state=checked]:border-purple-600"
-                      />
-                    </FormControl>
-                    <FormLabel className="text-neutral-200 font-normal">
-                      Remember me
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm text-gray-700 dark:text-neutral-200">
+                    Email address
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="name@example.com"
+                      className="h-11 bg-white dark:bg-[#1F1F1F] border-gray-200 dark:border-[#333333]
+                        text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-neutral-500
+                        focus:border-gray-300 dark:focus:border-neutral-400
+                        focus:ring-1 focus:ring-gray-300 dark:focus:ring-neutral-400
+                        transition-all"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-500 dark:text-red-400" />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex justify-between items-center">
+                    <FormLabel className="text-sm text-gray-700 dark:text-neutral-200">
+                      Password
                     </FormLabel>
-                  </FormItem>
-                )}
-              />
+                    <Link
+                      href="/forget-password"
+                      className="text-xs text-gray-500 hover:text-gray-900 dark:text-neutral-400 dark:hover:text-white transition-colors"
+                    >
+                      Forgot password?
+                    </Link>
+                  </div>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      placeholder="Enter your password"
+                      className="h-11 bg-white dark:bg-[#1F1F1F] border-gray-200 dark:border-[#333333]
+                        text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-neutral-500
+                        focus:border-gray-300 dark:focus:border-neutral-400
+                        focus:ring-1 focus:ring-gray-300 dark:focus:ring-neutral-400
+                        transition-all"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-500 dark:text-red-400" />
+                </FormItem>
+              )}
+            />
 
-              <Button
-                type="submit"
-                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white transition-all duration-300"
-                disabled={loading}
-              >
-                {loading ? (
-                  <Loader2 size={16} className="animate-spin" />
-                ) : (
-                  "Sign in"
-                )}
-              </Button>
+            <FormField
+              control={form.control}
+              name="rememberMe"
+              render={({ field }) => (
+                <FormItem className="flex items-center space-x-2 space-y-0">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      className="border-gray-300 dark:border-neutral-600
+                        data-[state=checked]:bg-gray-900 dark:data-[state=checked]:bg-white
+                        data-[state=checked]:border-gray-900 dark:data-[state=checked]:border-white"
+                    />
+                  </FormControl>
+                  <FormLabel className="text-sm text-gray-500 dark:text-neutral-400 font-normal">
+                    Stay signed in
+                  </FormLabel>
+                </FormItem>
+              )}
+            />
 
-              <div className="text-center">
-                <p className="text-neutral-400 text-sm">
-                  Don&apos;t have an account?{" "}
-                  <a
-                    href="/sign-up"
-                    className="text-purple-400 hover:text-purple-300 transition-colors"
-                  >
-                    Sign up
-                  </a>
-                </p>
-              </div>
-            </form>
-          </Form>
-        </CardContent>
-      </Card>
+            <Button
+              type="submit"
+              className="w-full h-11 bg-gray-900 hover:bg-gray-800 dark:bg-white dark:hover:bg-neutral-100
+                text-white dark:text-black font-medium transition-colors"
+              disabled={loading}
+            >
+              {loading ? (
+                <Loader2 size={16} className="animate-spin" />
+              ) : (
+                "Continue"
+              )}
+            </Button>
+
+            <div className="text-center pt-2">
+              <p className="text-gray-500 dark:text-neutral-400 text-sm">
+                Don't have an account?{" "}
+                <Link
+                  href="/sign-up"
+                  className="text-gray-900 hover:text-gray-700 dark:text-white dark:hover:text-neutral-200 transition-colors"
+                >
+                  Sign up
+                </Link>
+              </p>
+            </div>
+          </form>
+        </Form>
+      </div>
     </div>
   )
 }
