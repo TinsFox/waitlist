@@ -27,14 +27,22 @@ export default function NotFound() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
+          className="flex flex-col items-center gap-3"
         >
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/20"
+            className="inline-flex w-[160px] items-center justify-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/20"
           >
             <ArrowLeft className="size-4" />
             Back to Home
           </Link>
+          <button
+            onClick={() => window.history.back()}
+            className="inline-flex w-[160px] items-center justify-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/20"
+          >
+            <ArrowLeft className="size-4" />
+            Go Back
+          </button>
         </motion.div>
 
         <motion.div
