@@ -3,21 +3,23 @@ import Link from "next/link"
 
 export default function ForbiddenPage() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-          Forbidden
-        </h1>
-        <p className="mt-4 text-base text-gray-500 sm:mt-6">
-          Sorry, you are not authorized to access this page.
+    <div className="flex min-h-screen flex-col items-center justify-center bg-[#1B1B1D] text-white">
+      <div className="text-center max-w-[480px] px-4">
+        <h1 className="text-7xl font-bold mb-3">403</h1>
+        <h2 className="text-2xl font-medium mb-6 text-white/90">
+          Access Forbidden
+        </h2>
+        <p className="text-base text-white/60 mb-8">
+          You don't have permission to access this page. Please contact your administrator if you believe this is a mistake.
         </p>
-        <div className="mt-6">
-          <Button asChild>
-            <Link href="/">
-              Back to home
-            </Link>
-          </Button>
-        </div>
+        <Button
+          asChild
+          className="bg-[#5E6AD2] hover:bg-[#6E7AE6] text-white rounded-lg px-6 py-2.5 font-medium transition-colors"
+        >
+          <Link href="/">
+            Return to Home
+          </Link>
+        </Button>
       </div>
     </div>
   )

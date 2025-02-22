@@ -4,8 +4,8 @@ export default function ForbiddenLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="bg-white">
+    <>
       {children}
-    </div>
+    </>
   )
 }
