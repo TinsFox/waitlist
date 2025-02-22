@@ -48,18 +48,20 @@ export default function ForgetPassword() {
 
   if (isSubmitted) {
     return (
-      <main className="flex flex-col items-center justify-center min-h-[calc(100vh-10rem)]">
-        <Card className="w-[350px]">
-          <CardHeader>
-            <CardTitle>Check your email</CardTitle>
-            <CardDescription>
+      <main className="flex min-h-screen items-center justify-center bg-[#fafafa] dark:bg-[#0A0A0A]">
+        <Card className="w-[400px] border-0 bg-white/80 dark:bg-black/50 shadow-[0_0_1px_1px_rgba(0,0,0,0.1)] dark:shadow-[0_0_1px_1px_rgba(255,255,255,0.1)]">
+          <CardHeader className="space-y-3">
+            <CardTitle className="text-2xl font-normal text-neutral-900 dark:text-neutral-100">
+              Check your email
+            </CardTitle>
+            <CardDescription className="text-base text-neutral-600 dark:text-neutral-400">
               We&apos;ve sent a password reset link to your email.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Alert>
-              <CheckCircle2 className="h-4 w-4" />
-              <AlertDescription>
+            <Alert className="border-0 bg-blue-50/30 dark:bg-blue-500/10">
+              <CheckCircle2 className="h-4 w-4 text-blue-500" />
+              <AlertDescription className="text-neutral-700 dark:text-neutral-300">
                 If you don&apos;t see the email, check your spam folder.
               </AlertDescription>
             </Alert>
@@ -67,7 +69,7 @@ export default function ForgetPassword() {
           <CardFooter>
             <Button
               variant="outline"
-              className="w-full"
+              className="w-full border-neutral-200 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-900"
               onClick={() => setIsSubmitted(false)}
             >
               <ArrowLeft className="mr-2 h-4 w-4" /> Back to reset password
@@ -79,48 +81,53 @@ export default function ForgetPassword() {
   }
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-[calc(100vh-10rem)]">
-      <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
-      <Card className="w-[350px]">
-        <CardHeader>
-          <CardTitle>Forgot password</CardTitle>
-          <CardDescription>
+    <main className="flex min-h-screen items-center justify-center bg-[#fafafa] dark:bg-[#0A0A0A]">
+      <Card className="w-[400px] border-0 bg-white/80 dark:bg-black/50 shadow-[0_0_1px_1px_rgba(0,0,0,0.1)] dark:shadow-[0_0_1px_1px_rgba(255,255,255,0.1)]">
+        <CardHeader className="space-y-3">
+          <CardTitle className="text-2xl font-normal text-neutral-900 dark:text-neutral-100">
+            Reset password
+          </CardTitle>
+          <CardDescription className="text-base text-neutral-600 dark:text-neutral-400">
             Enter your email to reset your password
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit}>
-            <div className="grid w-full items-center gap-4">
-              <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-sm text-neutral-700 dark:text-neutral-300">
+                Email
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="name@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="h-10 border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900 focus:border-blue-500 dark:focus:border-blue-500 focus:ring-1 focus:ring-blue-500 dark:focus:ring-blue-500"
+              />
             </div>
             {error && (
-              <Alert variant="destructive" className="mt-4">
+              <Alert variant="destructive" className="border-0 bg-red-50/30 dark:bg-red-500/10">
                 <AlertCircle className="h-4 w-4" />
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             )}
             <Button
-              className="w-full mt-4"
+              className="w-full bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200 h-10 transition-colors"
               type="submit"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Sending..." : "Send reset link"}
+              {isSubmitting ? "Sending..." : "Continue"}
             </Button>
           </form>
         </CardContent>
         <CardFooter className="flex justify-center">
           <Link href="/sign-in">
-            <Button variant="link" className="px-0">
+            <Button
+              variant="link"
+              className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+            >
               Back to sign in
             </Button>
           </Link>
