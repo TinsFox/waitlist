@@ -56,13 +56,19 @@ export function NavGroup({
     return subItems?.some((item) => item.url === pathname) ?? false
   }
 
-  const handleItemClick = (item: NavItem) => {
+  const handleItemClick = (item: NavItem, isExpandButton = false) => {
     if (item.items?.length) {
+      const isCurrentlyOpen = openItems.includes(item.title)
+
       setOpenItems((prev) =>
-        prev.includes(item.title)
+        isCurrentlyOpen
           ? prev.filter((title) => title !== item.title)
           : [...prev, item.title]
       )
+
+      if (!isExpandButton && !isCurrentlyOpen && item.items[0]?.url) {
+        window.location.href = item.items[0].url
+      }
     }
   }
 
@@ -101,7 +107,7 @@ export function NavGroup({
                   onClick={() => handleItemClick(item)}
                 >
                   <Link
-                    href={item.items?.length ? "#" : item.url}
+                    href={item.items?.length ? (item.items[0]?.url || "#") : item.url}
                     target={item.target}
                   >
                     <item.icon />
@@ -141,7 +147,10 @@ export function NavGroup({
                   <>
                     <CollapsibleTrigger
                       asChild
-                      onClick={() => handleItemClick(item)}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        handleItemClick(item, true)
+                      }}
                     >
                       <SidebarMenuAction className="data-[state=open]:rotate-90">
                         <ChevronRight />
