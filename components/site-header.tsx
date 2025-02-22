@@ -11,7 +11,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-sm">
-      <div className="max-w-[1200px] mx-auto flex h-16 items-center justify-between px-4">
+      <div className="container max-w-7xl mx-auto flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center">
             <span className="text-lg font-semibold">Waitlist</span>
@@ -61,7 +61,7 @@ export function SiteHeader() {
                   className={cn(
                     "text-sm font-normal",
                     session.user.role !== "admin" &&
-                      "opacity-50 pointer-events-none"
+                    "opacity-50 pointer-events-none"
                   )}
                 >
                   Dashboard
