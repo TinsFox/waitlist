@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Professional Email & Waitlist Templates
+
+A professional email template and waitlist management system built with Next.js, featuring:
+
+- 📧 Rich email template editor with MDX support
+- 📝 Multiple pre-built email templates for different scenarios
+- 📊 Waitlist management dashboard
+- 🎨 Customizable landing page templates
+- 🌗 Dark/Light mode support
+- 🔒 Secure authentication and user management
 
 ## Getting Started
 
-First, run the development server:
+First, install the dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Key Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Email Templates
 
-## Learn More
+- Welcome emails
+- Newsletter templates
+- Notification emails
+- Review request emails
+- And more...
 
-To learn more about Next.js, take a look at the following resources:
+### Waitlist Management
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- User dashboard
+- Analytics and insights
+- Customizable forms
+- Automated workflows
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Landing Pages
+
+- Multiple professional templates
+- Fully customizable
+- Mobile responsive
+- SEO optimized
+
+## Tech Stack
+
+- [Next.js](https://nextjs.org) - React framework
+- [React Email](https://react.email) - Email template components
+- [Tailwind CSS](https://tailwindcss.com) - Styling
+- [MDX](https://mdxjs.com) - Markdown with JSX
+- [Vercel](https://vercel.com) - Deployment platform
+
+## Documentation
+
+For detailed documentation about features and usage, please visit our [documentation site](https://docs.example.com).
+
+## Contributing
+
+Contributions are welcome! Please read our [contributing guidelines](CONTRIBUTING.md) to get started.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The easiest way to deploy your application is to use the [Vercel Platform](https://vercel.com/new).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/your-repo-name)

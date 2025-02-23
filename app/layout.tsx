@@ -1,23 +1,23 @@
-import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
-import "./globals.css"
-import { ThemeProvider } from "next-themes"
-import { Toaster } from "@/components/ui/sonner"
-import { ViewTransitions } from "next-view-transitions"
-import { TooltipProvider } from "@/components/ui/tooltip"
-import { NuqsAdapter } from "nuqs/adapters/next/app"
-import { ReactQueryProviders } from "./providers"
-import { MdxProvider } from "@/components/mdx-provider"
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import { ThemeProvider } from "next-themes";
+import { Toaster } from "@/components/ui/sonner";
+import { ViewTransitions } from "next-view-transitions";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { ReactQueryProviders } from "./providers";
+import { MdxProvider } from "@/components/mdx-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-})
+});
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
-})
+});
 
 export const metadata: Metadata = {
   title: "Professional Product Waitlist Templates",
@@ -100,12 +100,12 @@ export const metadata: Metadata = {
     images: ["/og.png"],
   },
   category: "Technology",
-}
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <ViewTransitions>
@@ -113,27 +113,27 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <TooltipProvider>
-              <MdxProvider>
-                <ReactQueryProviders>
-                  <NuqsAdapter>
+          <NuqsAdapter>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <TooltipProvider>
+                <MdxProvider>
+                  <ReactQueryProviders>
                     <div className="flex min-h-screen flex-col bg-background relative">
                       {children}
                     </div>
-                  </NuqsAdapter>
-                </ReactQueryProviders>
-                <Toaster />
-              </MdxProvider>
-            </TooltipProvider>
-          </ThemeProvider>
+                  </ReactQueryProviders>
+                  <Toaster />
+                </MdxProvider>
+              </TooltipProvider>
+            </ThemeProvider>
+          </NuqsAdapter>
         </body>
       </html>
     </ViewTransitions>
-  )
+  );
 }

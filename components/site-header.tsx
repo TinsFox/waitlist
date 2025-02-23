@@ -1,13 +1,38 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { authClient } from "@/lib/auth-client"
-import { cn } from "@/lib/utils"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { authClient } from "@/lib/auth-client";
+import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
+
+const headerLinks = [
+  {
+    label: "Templates",
+    href: "/template",
+  },
+  {
+    label: "Mails",
+    href: "/mails",
+  },
+  {
+    label: "Features",
+    href: "/features",
+  },
+  {
+    label: "Pricing",
+    href: "/pricing",
+  },
+  {
+    label: "Changelog",
+    href: "/changelog",
+  },
+];
 
 export function SiteHeader() {
-  const { data: session, isPending } = authClient.useSession()
+  const { data: session, isPending } = authClient.useSession();
+  const pathname = usePathname();
 
   return (
     <header className="sticky top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-sm">
@@ -17,30 +42,20 @@ export function SiteHeader() {
             <span className="text-lg font-semibold">Waitlist</span>
           </Link>
           <nav className="hidden md:flex items-center gap-6">
-            <Link
-              href="/template"
-              className="text-sm text-foreground/60 transition-colors hover:text-foreground"
-            >
-              Templates
-            </Link>
-            <Link
-              href="/features"
-              className="text-sm text-foreground/60 transition-colors hover:text-foreground"
-            >
-              Features
-            </Link>
-            <Link
-              href="/pricing"
-              className="text-sm text-foreground/60 transition-colors hover:text-foreground"
-            >
-              Pricing
-            </Link>
-            <Link
-              href="/changelog"
-              className="text-sm text-foreground/60 transition-colors hover:text-foreground"
-            >
-              Changelog
-            </Link>
+            {headerLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "text-sm transition-colors",
+                  pathname === link.href
+                    ? "text-foreground font-medium"
+                    : "text-foreground/60 hover:text-foreground"
+                )}
+              >
+                {link.label}
+              </Link>
+            ))}
           </nav>
         </div>
         <div className="flex items-center gap-2">
@@ -91,5 +106,5 @@ export function SiteHeader() {
         </div>
       </div>
     </header>
-  )
+  );
 }

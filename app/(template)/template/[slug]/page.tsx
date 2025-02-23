@@ -1,9 +1,9 @@
-import type { Metadata, ResolvingMetadata } from "next"
+import type { Metadata } from "next"
 import { waitlistTemplates } from "@/lib/db/schema"
 import { db } from "@/lib/db"
 import { eq } from "drizzle-orm"
 import { Suspense } from "react"
-import { getAllTemplates } from "@/lib/blocks"
+import { getAllHomeBlocks } from "@/lib/blocks"
 import { Skeleton } from "@/components/ui/skeleton"
 
 type Props = {
@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function TemplatePage({ params }: Props) {
   const slug = (await params).slug
-  const templates = await getAllTemplates()
+  const templates = await getAllHomeBlocks()
   if (!templates) {
     return <div>Template not found</div>
   }

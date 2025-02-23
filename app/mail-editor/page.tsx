@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useCallback, useRef, Suspense } from "react"
-import { render } from "@react-email/render"
+import { useState, useEffect, useCallback, useRef, Suspense } from "react";
+import { render } from "@react-email/render";
 import {
   Body,
   Container,
@@ -13,15 +13,15 @@ import {
   Hr,
   Tailwind,
   Button,
-} from "@react-email/components"
-import { Editor } from "@monaco-editor/react"
-import { serialize } from "next-mdx-remote/serialize"
-import { MDXRemoteSerializeResult } from "next-mdx-remote"
-import { debounce } from "lodash-es"
-import tailwindConfig from "@/tailwind.config"
-import { MdxProvider } from "@/components/mdx-provider"
-import { MdxPreview } from "@/components/mdx-preview"
-import { Button as ButtonUI, buttonVariants } from "@/components/ui/button"
+} from "@react-email/components";
+import { Editor } from "@monaco-editor/react";
+import { serialize } from "next-mdx-remote/serialize";
+import { MDXRemoteSerializeResult } from "next-mdx-remote";
+import { debounce } from "lodash-es";
+import tailwindConfig from "@/tailwind.config";
+import { MdxProvider } from "@/components/mdx-provider";
+import { MdxPreview } from "@/components/mdx-preview";
+import { Button as ButtonUI, buttonVariants } from "@/components/ui/button";
 const DEFAULT_TEMPLATE = `
 # Welcome to our newsletter!
 
@@ -37,11 +37,10 @@ Some **mdx** text, with a component
 
 Best regards,
 The Team
-`
+`;
 
-console.log(buttonVariants({ variant: "default" }))
 const EmailTemplate = ({ source }: { source: MDXRemoteSerializeResult }) => {
-  if (!source) return null
+  if (!source) return null;
   return (
     <MdxProvider>
       <Html>
@@ -171,29 +170,29 @@ const EmailTemplate = ({ source }: { source: MDXRemoteSerializeResult }) => {
         </Tailwind>
       </Html>
     </MdxProvider>
-  )
-}
+  );
+};
 interface EditorState {
-  preview: string
-  error: string
-  isLoading: boolean
+  preview: string;
+  error: string;
+  isLoading: boolean;
 }
 
 export default function EmailEditor() {
-  const [mdxSource, setMdxSource] = useState(DEFAULT_TEMPLATE)
+  const [mdxSource, setMdxSource] = useState(DEFAULT_TEMPLATE);
   const [editorState, setEditorState] = useState<EditorState>({
     preview: "",
     error: "",
     isLoading: false,
-  })
-  const [preview, setPreview] = useState<MDXRemoteSerializeResult | null>(null)
-  const iframeRef = useRef<HTMLIFrameElement>(null)
+  });
+  const [preview, setPreview] = useState<MDXRemoteSerializeResult | null>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   // 使用 useCallback 和 debounce 优化更新函数
   const updateIframeContent = useCallback((html: string) => {
     if (iframeRef.current?.contentWindow?.document) {
-      const doc = iframeRef.current.contentWindow.document
-      doc.open()
+      const doc = iframeRef.current.contentWindow.document;
+      doc.open();
       const htmlContent = `
         <!DOCTYPE html>
         <html>
@@ -205,12 +204,12 @@ export default function EmailEditor() {
             ${html}
           </body>
         </html>
-      `
-      doc.write(htmlContent)
-      console.log(htmlContent)
-      doc.close()
+      `;
+      doc.write(htmlContent);
+      console.log(htmlContent);
+      doc.close();
     }
-  }, [])
+  }, []);
 
   // 初始化预览
   useEffect(() => {
@@ -218,71 +217,70 @@ export default function EmailEditor() {
       try {
         const content = await serialize(mdxSource, {
           mdxOptions: {},
-        })
-        setPreview(content)
+        });
+        setPreview(content);
         const html = await render(<EmailTemplate source={content} />, {
           pretty: true,
-        })
+        });
 
         setEditorState((prev) => ({
           ...prev,
           preview: html,
           error: "",
-        }))
-        updateIframeContent(html)
+        }));
+        updateIframeContent(html);
       } catch (err) {
-        console.error("Initial rendering error:", err)
+        console.error("Initial rendering error:", err);
         setEditorState((prev) => ({
           ...prev,
           error:
             err instanceof Error
               ? `Error: ${err.message}`
               : "An unexpected error occurred while rendering the template",
-        }))
+        }));
       }
-    }
+    };
 
-    initPreview()
-  }, [mdxSource, updateIframeContent])
+    initPreview();
+  }, [mdxSource, updateIframeContent]);
 
   const debouncedHandleEditorChange = useCallback(
     debounce(async (value: string | undefined) => {
-      if (!value) return
-      setEditorState((prev) => ({ ...prev, isLoading: true }))
+      if (!value) return;
+      setEditorState((prev) => ({ ...prev, isLoading: true }));
       try {
-        setMdxSource(value)
+        setMdxSource(value);
 
-        const content = await serialize(value)
-        setPreview(content)
+        const content = await serialize(value);
+        setPreview(content);
         const html = await render(<EmailTemplate source={content} />, {
           pretty: true,
-        })
+        });
 
-        console.log("html: ", html)
         setEditorState((prev) => ({
           ...prev,
           preview: html,
           error: "",
-        }))
+        }));
 
-        updateIframeContent(html)
+        updateIframeContent(html);
       } catch (err) {
-        console.error("Rendering error:", err)
+        console.error("Rendering error:", err);
         setEditorState((prev) => ({
           ...prev,
           error:
             err instanceof Error
               ? `Error: ${err.message}`
               : "An unexpected error occurred while rendering the template",
-        }))
+        }));
       } finally {
-        setEditorState((prev) => ({ ...prev, isLoading: false }))
+        setEditorState((prev) => ({ ...prev, isLoading: false }));
       }
     }, 100),
     [updateIframeContent]
-  )
+  );
 
-  const { error, isLoading } = editorState
+  const { error, isLoading } = editorState;
 
   return (
     <div className="flex h-screen  ">
@@ -389,5 +387,5 @@ export default function EmailEditor() {
         </div>
       </div>
     </div>
-  )
+  );
 }
