@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   Card,
@@ -6,8 +6,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 export const ComingSoonCard = () => {
   return (
@@ -32,11 +32,11 @@ export const ComingSoonCard = () => {
           unique designs to help you create the perfect waitlist experience.
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex-grow flex flex-col items-center justify-center space-y-4">
+      <CardContent className="flex-grow flex flex-col  justify-center space-y-4">
         <div className="text-4xl text-muted-foreground/50">✨</div>
-        <div className="text-center text-sm text-muted-foreground">
+        <div className="text-sm text-muted-foreground">
           <p>Features coming in new templates:</p>
-          <ul className="mt-2 space-y-1">
+          <ul className="mt-2 space-y-1 text-left">
             <li>• Interactive animations</li>
             <li>• Custom form layouts</li>
             <li>• Advanced styling options</li>
@@ -44,5 +44,5 @@ export const ComingSoonCard = () => {
         </div>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
