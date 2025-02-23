@@ -1,3 +1,4 @@
+import { env } from '@/env';
 import {
   Body,
   Container,
@@ -17,9 +18,7 @@ interface AWSVerifyEmailProps {
   verificationCode?: string;
 }
 
-const baseUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : '';
+const baseUrl = env.NEXT_PUBLIC_URL
 
 export default function AWSVerifyEmail({
   verificationCode = '596853',
