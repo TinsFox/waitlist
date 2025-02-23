@@ -10,5 +10,5 @@ export const db = drizzle(sql, {
     ...schema,
     ...authSchema,
   },
-  logger: process.env.NODE_ENV === "development",
+  // logger: process.env.NODE_ENV === "development",
 });

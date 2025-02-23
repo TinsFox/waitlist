@@ -13,3 +13,14 @@ export async function getAllHomeBlocks() {
   return registryData.home
 }
 
+export async function getAllMailCategories(): Promise<string[]> {
+  const { registryData } = await import(`@/registry/index`)
+  const categories = new Set<string>()
+
+  Object.values(registryData.emails).forEach((email) => {
+    categories.add(email.category)
+  })
+
+  return Array.from(categories)
+}
+

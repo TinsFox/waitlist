@@ -1,34 +1,36 @@
-"use client"
+"use client";
 
-import { Input } from "@/components/ui/input"
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { useQueryStates } from "nuqs"
-import { searchParamsParsers } from "@/app/search-params"
-import { useTransition } from "react"
-import { useDebouncedCallback } from "use-debounce"
+} from "@/components/ui/select";
+
+import { searchParamsCache, serialize } from "@/app/search-params";
+import { useTransition } from "react";
 
 interface ClientSearchFiltersProps {
-  categories: string[]
+  categories: string[];
 }
 
 export function ClientSearchFilters({ categories }: ClientSearchFiltersProps) {
-  const [isPending, startTransition] = useTransition()
+  const { q, category } = searchParamsCache.all();
 
-  const [searchParams, setSearchParams] = useQueryStates(searchParamsParsers, {
-    shallow: false,
-    startTransition,
-    history: "push",
-  })
-
-  const debouncedSetSearch = useDebouncedCallback((value: string) => {
-    setSearchParams({ q: value })
-  }, 300)
+  const updateQValue = (value: string) => {
+    serialize("/", {
+      q: value,
+      category,
+    });
+  };
+  const updateCategoryValue = (value: string) => {
+    serialize("/", {
+      q,
+      category: value,
+    });
+  };
 
   return (
     <div
@@ -39,19 +41,17 @@ export function ClientSearchFilters({ categories }: ClientSearchFiltersProps) {
       <div className="flex-1">
         <Input
           placeholder="Search templates..."
-          defaultValue={searchParams.q}
-          onChange={(e) => debouncedSetSearch(e.target.value)}
+          defaultValue={q}
+          onChange={(e) => updateQValue(e.target.value)}
           className="max-w-md"
           aria-label="Search templates"
         />
       </div>
 
-      {isPending && (
-        <div className="h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
-      )}
+      <div className="h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
       <Select
-        value={searchParams.category}
-        onValueChange={(value) => setSearchParams({ category: value })}
+        value={category}
+        onValueChange={updateCategoryValue}
         aria-label="Filter by category"
       >
         <SelectTrigger className="w-[180px]">
@@ -67,5 +67,5 @@ export function ClientSearchFilters({ categories }: ClientSearchFiltersProps) {
         </SelectContent>
       </Select>
     </div>
-  )
+  );
 }

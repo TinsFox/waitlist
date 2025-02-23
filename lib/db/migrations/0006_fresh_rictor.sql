@@ -1,0 +1,1 @@
+ALTER TABLE "waitlist_templates" ALTER COLUMN "title" SET NOT NULL;

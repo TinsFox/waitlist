@@ -5,12 +5,26 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import React from "react";
 import { ArrowRight, Inbox } from "lucide-react";
+import { searchParamsCache } from "@/app/search-params";
+import { searchInObject } from "@/lib/search";
 
 export async function FilteredMails() {
   const allMails = await getAllMailBlocks();
   const mailsArray = Object.values(allMails);
+  const { q, category } = searchParamsCache.all();
 
-  const filteredMails = mailsArray;
+  const filteredMails = mailsArray.filter((mail) => {
+    if (category !== "all") {
+      return mail.category === category;
+    }
+    return searchInObject(mail, q, [
+      'name',
+      'description',
+      'category',
+      'slug',
+      'title'
+    ]);
+  });
   if (filteredMails.length === 0) {
     return (
       <div className="col-span-full text-center">

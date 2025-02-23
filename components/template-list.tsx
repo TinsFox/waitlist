@@ -7,9 +7,11 @@ import { TemplatePreview } from "./template-preview"
 
 interface TemplateListProps {
   templates: WaitlistTemplate[]
+  showMore?: boolean
 }
 
-export function TemplateList({ templates }: TemplateListProps) {
+export function TemplateList({ templates, showMore = true }: TemplateListProps) {
+
   return (
     <>
       <div
@@ -33,16 +35,18 @@ export function TemplateList({ templates }: TemplateListProps) {
             />
           </motion.div>
         ))}
-        <motion.div
-          role="listitem"
-          aria-label={"Coming soon template"}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: templates.length * 0.1 }}
-          whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
-        >
-          <ComingSoonCard />
-        </motion.div>
+        {showMore && (
+          <motion.div
+            role="listitem"
+            aria-label={"Coming soon template"}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: templates.length * 0.1 }}
+            whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
+          >
+            <ComingSoonCard />
+          </motion.div>
+        )}
       </div>
 
       {templates.length === 0 && (

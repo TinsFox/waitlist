@@ -1,9 +1,15 @@
 import { FilteredMails } from "@/components/filtered-mails";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
-import { SiteFooter } from "@/components/site-footer";
+import type { PageProps } from "@/types/params";
+import { SearchFilters } from "@/components/search-filters.client";
+import { getAllMailCategories } from "@/lib/blocks";
+import { searchParamsCache } from "@/app/search-params";
 
-export default function MailsPage() {
+export default async function MailsPage({ searchParams }: PageProps) {
+  await searchParamsCache.parse(searchParams);
+
+  const categories = await getAllMailCategories();
   return (
     <div className="flex min-h-screen flex-col bg-background relative">
       <main className="flex-1 container mx-auto px-4 py-16 mt-16 relative">
@@ -16,7 +22,7 @@ export default function MailsPage() {
             </div>
           }
         >
-          Search Filters
+          <SearchFilters categories={categories} />
         </Suspense>
 
         <Suspense
