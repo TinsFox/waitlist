@@ -7,7 +7,7 @@ interface PreviewProps {
   templateId: string;
 }
 
-export const Preview: React.FC<PreviewProps> = async ({
+export const MailPreview: React.FC<PreviewProps> = async ({
   category,
   templateId,
 }) => {
