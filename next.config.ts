@@ -5,11 +5,19 @@ const nextConfig: NextConfig = {
     mdxRs: true,
   },
   images: {
-    // ui.aceternity.com
-    domains: [
-      "ui.aceternity.com",
-      "images.unsplash.com",
-      "assets.aceternity.com",
+    remotePatterns: [
+      {
+        hostname: "ui.aceternity.com",
+        protocol: "https",
+      },
+      {
+        hostname: "images.unsplash.com",
+        protocol: "https",
+      },
+      {
+        hostname: "assets.aceternity.com",
+        protocol: "https",
+      },
     ],
   },
   transpilePackages: ["next-mdx-remote"],
