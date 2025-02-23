@@ -123,7 +123,7 @@ export default function RootLayout({
               <TooltipProvider>
                 <MdxProvider>
                   <ReactQueryProviders>
-                    <div className="flex min-h-screen flex-col bg-background relative">
+                    <div className="flex flex-col bg-background relative">
                       {children}
                     </div>
                   </ReactQueryProviders>

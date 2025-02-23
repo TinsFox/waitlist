@@ -48,7 +48,7 @@ export async function FilteredMails() {
             </div>
 
             <div className="flex flex-col space-y-4">
-              <div className="flex-1 border rounded-md p-4 bg-white min-h-[500px] overflow-hidden">
+              <div className="flex-1 border rounded-md min-h-[300px] overflow-hidden">
                 <Suspense fallback={null}>
                   <iframe
                     frameBorder="0"
