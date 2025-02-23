@@ -50,15 +50,15 @@ export const navigationData: NavSection[] = [
         items: [
           {
             title: "Users",
-            url: "/waitlists",
+            url: "/users",
           },
           {
             title: "Active Lists",
-            url: "/waitlists/active",
+            url: "/users/active",
           },
           {
             title: "Archived",
-            url: "/waitlists/archived",
+            url: "/users/archived",
           },
         ],
       },
@@ -126,10 +126,6 @@ export const navigationData: NavSection[] = [
             url: "/settings/general",
           },
           {
-            title: "Team",
-            url: "/settings/team",
-          },
-          {
             title: "API",
             url: "/settings/api",
           },
@@ -155,70 +151,6 @@ export const navigationData: NavSection[] = [
         ],
       },
     ],
-  },
-  {
-    label: "Projects",
-    items: [
-      {
-        title: "Design Engineering",
-        url: "#",
-        icon: Frame,
-        actions: [
-          {
-            icon: Folder,
-            label: "View Project",
-          },
-          {
-            icon: Share,
-            label: "Share Project",
-          },
-          {
-            icon: Trash2,
-            label: "Delete Project",
-          },
-        ],
-      },
-      {
-        title: "Sales & Marketing",
-        url: "#",
-        icon: PieChart,
-        actions: [
-          {
-            icon: Folder,
-            label: "View Project",
-          },
-          {
-            icon: Share,
-            label: "Share Project",
-          },
-          {
-            icon: Trash2,
-            label: "Delete Project",
-          },
-        ],
-      },
-      {
-        title: "Travel",
-        url: "#",
-        icon: Map,
-        actions: [
-          {
-            icon: Folder,
-            label: "View Project",
-          },
-          {
-            icon: Share,
-            label: "Share Project",
-          },
-          {
-            icon: Trash2,
-            label: "Delete Project",
-          },
-        ],
-      },
-    ],
-    hideOnCollapse: true,
-    showMoreButton: true,
   },
   {
     label: "Support",

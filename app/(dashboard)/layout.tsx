@@ -9,6 +9,12 @@ import {
 import { cookies } from "next/headers"
 import { headers } from "next/headers"
 import { auth } from "@/lib/auth"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Waitlist - Dashboard",
+  description: "Manage your waitlist",
+}
 
 export default async function DashboardLayout({
   children,
